@@ -1,0 +1,21 @@
+object CardHandFrame: TCardHandFrame
+  Left = 0
+  Height = 254
+  Top = 0
+  Width = 864
+  ClientHeight = 254
+  ClientWidth = 864
+  LCLVersion = '2.0.6.0'
+  TabOrder = 0
+  DesignLeft = 409
+  DesignTop = 385
+  object Shape1: TShape
+    Left = 161
+    Height = 49
+    Top = 0
+    Width = 9
+    Brush.Color = clHighlight
+    Pen.Style = psClear
+    Visible = False
+  end
+end

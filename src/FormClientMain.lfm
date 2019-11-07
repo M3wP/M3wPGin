@@ -1,0 +1,1077 @@
+object ClientMainForm: TClientMainForm
+  Left = 367
+  Height = 598
+  Top = 220
+  Width = 921
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
+  Caption = 'M3wP Gin!'
+  ClientHeight = 598
+  ClientWidth = 921
+  KeyPreview = True
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  Position = poDesktopCenter
+  LCLVersion = '2.0.6.0'
+  object PgctrlMain: TPageControl
+    Left = 0
+    Height = 544
+    Top = 54
+    Width = 921
+    ActivePage = TbshtConnect
+    Align = alClient
+    ShowTabs = False
+    TabIndex = 0
+    TabOrder = 0
+    object TbshtConnect: TTabSheet
+      ClientHeight = 536
+      ClientWidth = 913
+      ImageIndex = 0
+      object PgctrlConnect: TPageControl
+        Left = 0
+        Height = 536
+        Top = 0
+        Width = 913
+        ActivePage = TbshtHost
+        Align = alClient
+        ShowTabs = False
+        TabIndex = 0
+        TabOrder = 0
+        object TbshtHost: TTabSheet
+          Caption = 'TbshtHost'
+          ClientHeight = 528
+          ClientWidth = 905
+          object Panel2: TPanel
+            Left = 0
+            Height = 182
+            Top = 34
+            Width = 905
+            Align = alTop
+            BevelOuter = bvNone
+            ClientHeight = 182
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 0
+            object Label1: TLabel
+              Left = 8
+              Height = 15
+              Top = 12
+              Width = 63
+              Caption = 'Host Name:'
+              ParentColor = False
+            end
+            object EditHost: TEdit
+              Left = 144
+              Height = 23
+              Top = 8
+              Width = 344
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 0
+              Text = '127.0.0.1'
+            end
+            object EditUserName: TEdit
+              Left = 144
+              Height = 23
+              Top = 40
+              Width = 120
+              Anchors = [akTop, akLeft, akRight]
+              MaxLength = 8
+              TabOrder = 1
+              Text = 'testpc'
+            end
+            object Label2: TLabel
+              Left = 8
+              Height = 15
+              Top = 44
+              Width = 61
+              Caption = 'User Name:'
+              ParentColor = False
+            end
+            object Button1: TButton
+              Left = 272
+              Height = 25
+              Top = 40
+              Width = 75
+              Anchors = [akTop, akRight]
+              Caption = 'Update'
+              TabOrder = 2
+            end
+            object BtnHostCntrl: TButton
+              Left = 144
+              Height = 25
+              Top = 72
+              Width = 75
+              Action = ClientMainDMod.ActHostConnect
+              TabOrder = 3
+            end
+            object EditHostInfo: TEdit
+              Left = 144
+              Height = 23
+              Top = 120
+              Width = 756
+              Anchors = [akTop, akLeft, akRight]
+              Color = clBtnFace
+              ReadOnly = True
+              TabOrder = 4
+            end
+            object Label3: TLabel
+              Left = 8
+              Height = 15
+              Top = 124
+              Width = 52
+              Caption = 'Host Info:'
+              ParentColor = False
+            end
+            object Label4: TLabel
+              Left = 8
+              Height = 15
+              Top = 160
+              Width = 89
+              Caption = 'Connection Info:'
+              ParentColor = False
+            end
+          end
+          object MemoHost: TMemo
+            Left = 0
+            Height = 312
+            Top = 216
+            Width = 905
+            Align = alClient
+            ReadOnly = True
+            ScrollBars = ssAutoVertical
+            TabOrder = 1
+          end
+          object ToolBar2: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar2'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 2
+            object ToolButton6: TToolButton
+              Left = 824
+              Top = 0
+              Action = ClientMainDMod.ActNavDebug
+            end
+            object Panel1: TPanel
+              Left = 1
+              Height = 32
+              Top = 0
+              Width = 823
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 823
+              TabOrder = 0
+              object Label7: TLabel
+                Left = 80
+                Height = 32
+                Top = 0
+                Width = 743
+                Align = alClient
+                Alignment = taCenter
+                BorderSpacing.Left = 80
+                Caption = 'Server'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+          end
+        end
+        object TbshtDebug: TTabSheet
+          Caption = 'TbshtDebug'
+          ClientHeight = 528
+          ClientWidth = 905
+          object ToolBar3: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar3'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 0
+            object ToolButton7: TToolButton
+              Left = 1
+              Top = 0
+              Action = ClientMainDMod.ActNavHost
+            end
+            object Panel3: TPanel
+              Left = 81
+              Height = 32
+              Top = 0
+              Width = 823
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 823
+              TabOrder = 0
+              object Label8: TLabel
+                Left = 0
+                Height = 32
+                Top = 0
+                Width = 743
+                Align = alClient
+                Alignment = taCenter
+                BorderSpacing.Right = 80
+                Caption = 'Debug'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+          end
+          object MemoDebug: TMemo
+            Left = 0
+            Height = 494
+            Top = 34
+            Width = 905
+            Align = alClient
+            ReadOnly = True
+            ScrollBars = ssAutoVertical
+            TabOrder = 1
+          end
+        end
+      end
+    end
+    object TbshtChat: TTabSheet
+      Caption = 'TbshtChat'
+      ClientHeight = 536
+      ClientWidth = 913
+      object PgctrlChat: TPageControl
+        Left = 0
+        Height = 536
+        Top = 0
+        Width = 913
+        ActivePage = TbshtRoom
+        Align = alClient
+        ShowTabs = False
+        TabIndex = 1
+        TabOrder = 0
+        object TbshtLobby: TTabSheet
+          Caption = 'TbshtLobby'
+          ClientHeight = 528
+          ClientWidth = 905
+          object ToolBar4: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar4'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 0
+            object ToolButton10: TToolButton
+              Left = 825
+              Top = 0
+              Action = ClientMainDMod.ActNavRoom
+            end
+            object Panel4: TPanel
+              Left = 1
+              Height = 32
+              Top = 0
+              Width = 824
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 824
+              TabOrder = 0
+              object Label6: TLabel
+                Left = 80
+                Height = 32
+                Top = 0
+                Width = 744
+                Align = alClient
+                Alignment = taCenter
+                BorderSpacing.Left = 80
+                Caption = 'Lobby'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+          end
+          object Panel6: TPanel
+            Left = 0
+            Height = 134
+            Top = 34
+            Width = 905
+            Align = alTop
+            BevelOuter = bvNone
+            ClientHeight = 134
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 1
+            object EditRoom: TEdit
+              Left = 144
+              Height = 23
+              Top = 8
+              Width = 120
+              Anchors = [akTop, akLeft, akRight]
+              MaxLength = 8
+              TabOrder = 0
+            end
+            object Label5: TLabel
+              Left = 8
+              Height = 15
+              Top = 12
+              Width = 35
+              Caption = 'Room:'
+              ParentColor = False
+            end
+            object EditRoomPwd: TEdit
+              Left = 144
+              Height = 23
+              Top = 40
+              Width = 120
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 1
+            end
+            object Label10: TLabel
+              Left = 8
+              Height = 15
+              Top = 44
+              Width = 53
+              Caption = 'Password:'
+              ParentColor = False
+            end
+            object ButtonRoomJoin: TButton
+              Left = 272
+              Height = 25
+              Top = 40
+              Width = 75
+              Action = ClientMainDMod.ActRoomJoin
+              Anchors = [akTop, akRight]
+              TabOrder = 2
+            end
+            object Button3: TButton
+              Left = 272
+              Height = 25
+              Top = 72
+              Width = 75
+              Action = ClientMainDMod.ActRoomList
+              Anchors = [akTop, akRight]
+              TabOrder = 3
+            end
+            object Label11: TLabel
+              Left = 8
+              Height = 15
+              Top = 112
+              Width = 38
+              Caption = 'Listing:'
+              ParentColor = False
+            end
+            object Label25: TLabel
+              Left = 8
+              Height = 15
+              Top = 64
+              Width = 62
+              Caption = '(for private)'
+              ParentColor = False
+            end
+          end
+          object MemoRoomList: TMemo
+            Left = 0
+            Height = 360
+            Top = 168
+            Width = 905
+            Align = alClient
+            ScrollBars = ssAutoVertical
+            TabOrder = 2
+          end
+        end
+        object TbshtRoom: TTabSheet
+          Caption = 'TbshtRoom'
+          ClientHeight = 528
+          ClientWidth = 905
+          object MemoRoom: TMemo
+            Left = 0
+            Height = 454
+            Top = 34
+            Width = 905
+            Align = alClient
+            ScrollBars = ssAutoVertical
+            TabOrder = 2
+          end
+          object ToolBar5: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar5'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 0
+            object ToolButton9: TToolButton
+              Left = 1
+              Top = 0
+              Action = ClientMainDMod.ActNavLobby
+            end
+            object Panel5: TPanel
+              Left = 81
+              Height = 32
+              Top = 0
+              Width = 744
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 744
+              TabOrder = 0
+              object Label9: TLabel
+                Left = 0
+                Height = 32
+                Top = 0
+                Width = 744
+                Align = alClient
+                Alignment = taCenter
+                Caption = 'Room'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+            object ToolButton5: TToolButton
+              Left = 825
+              Top = 0
+              Action = ClientMainDMod.ActRoomUsers
+            end
+          end
+          object Panel7: TPanel
+            Left = 0
+            Height = 40
+            Top = 488
+            Width = 905
+            Align = alBottom
+            BevelOuter = bvNone
+            ClientHeight = 40
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 1
+            object EditRoomText: TEdit
+              Left = 1
+              Height = 23
+              Top = 8
+              Width = 899
+              Anchors = [akTop, akLeft, akRight]
+              MaxLength = 40
+              OnKeyPress = EditRoomTextKeyPress
+              TabOrder = 0
+            end
+          end
+          object PanelRoomUsers: TPanel
+            Left = 748
+            Height = 454
+            Top = 34
+            Width = 157
+            Anchors = [akTop, akRight, akBottom]
+            ClientHeight = 454
+            ClientWidth = 157
+            ParentColor = False
+            TabOrder = 3
+            Visible = False
+            object LstbxRoomUsers: TListBox
+              Left = 9
+              Height = 421
+              Top = 24
+              Width = 139
+              Align = alClient
+              BorderSpacing.Around = 8
+              ItemHeight = 0
+              ScrollWidth = 132
+              TabOrder = 0
+            end
+            object Label12: TLabel
+              Left = 9
+              Height = 15
+              Top = 1
+              Width = 147
+              Align = alTop
+              BorderSpacing.Left = 8
+              Caption = 'Users:'
+              ParentColor = False
+            end
+          end
+        end
+      end
+    end
+    object TbshtPlay: TTabSheet
+      Caption = 'TbshtPlay'
+      ClientHeight = 536
+      ClientWidth = 913
+      object PgctrlPlay: TPageControl
+        Left = 0
+        Height = 536
+        Top = 0
+        Width = 913
+        ActivePage = TbshtStart
+        Align = alClient
+        ShowTabs = False
+        TabIndex = 0
+        TabOrder = 0
+        object TbshtStart: TTabSheet
+          Caption = 'TbshtLobby'
+          ClientHeight = 528
+          ClientWidth = 905
+          object ToolBar6: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar4'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 0
+            object ToolButton11: TToolButton
+              Left = 824
+              Top = 0
+              Action = ClientMainDMod.ActNavOverview
+            end
+            object Panel8: TPanel
+              Left = 1
+              Height = 32
+              Top = 0
+              Width = 823
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 823
+              TabOrder = 0
+              object Label13: TLabel
+                Left = 80
+                Height = 32
+                Top = 0
+                Width = 743
+                Align = alClient
+                Alignment = taCenter
+                BorderSpacing.Left = 80
+                Caption = 'Start'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+          end
+          object Panel9: TPanel
+            Left = 0
+            Height = 134
+            Top = 34
+            Width = 905
+            Align = alTop
+            BevelOuter = bvNone
+            ClientHeight = 134
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 1
+            object EditGame: TEdit
+              Left = 144
+              Height = 23
+              Top = 8
+              Width = 120
+              Anchors = [akTop, akLeft, akRight]
+              MaxLength = 8
+              TabOrder = 0
+            end
+            object Label14: TLabel
+              Left = 8
+              Height = 15
+              Top = 12
+              Width = 34
+              Caption = 'Game:'
+              ParentColor = False
+            end
+            object EditGamePwd: TEdit
+              Left = 144
+              Height = 23
+              Top = 40
+              Width = 120
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 1
+            end
+            object Label15: TLabel
+              Left = 8
+              Height = 15
+              Top = 44
+              Width = 53
+              Caption = 'Password:'
+              ParentColor = False
+            end
+            object ButtonGameJoin: TButton
+              Left = 272
+              Height = 25
+              Top = 40
+              Width = 75
+              Action = ClientMainDMod.ActGameJoin
+              Anchors = [akTop, akRight]
+              TabOrder = 2
+            end
+            object Button4: TButton
+              Left = 272
+              Height = 25
+              Top = 69
+              Width = 75
+              Action = ClientMainDMod.ActGameList
+              Anchors = [akTop, akRight]
+              TabOrder = 3
+            end
+            object Label16: TLabel
+              Left = 8
+              Height = 15
+              Top = 112
+              Width = 38
+              Caption = 'Listing:'
+              ParentColor = False
+            end
+            object Label26: TLabel
+              Left = 8
+              Height = 15
+              Top = 69
+              Width = 62
+              Caption = '(for private)'
+              ParentColor = False
+            end
+          end
+          object MemoGameList: TMemo
+            Left = 0
+            Height = 360
+            Top = 168
+            Width = 905
+            Align = alClient
+            ScrollBars = ssAutoVertical
+            TabOrder = 2
+          end
+        end
+        object TbshtOverview: TTabSheet
+          Caption = 'TbshtRoom'
+          ClientHeight = 528
+          ClientWidth = 905
+          object MemoGame: TMemo
+            Left = 0
+            Height = 200
+            Top = 288
+            Width = 905
+            Align = alClient
+            ScrollBars = ssAutoVertical
+            TabOrder = 2
+          end
+          object ToolBar7: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar5'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 0
+            object ToolButton12: TToolButton
+              Left = 1
+              Top = 0
+              Action = ClientMainDMod.ActNavStart
+            end
+            object Panel10: TPanel
+              Left = 81
+              Height = 32
+              Top = 0
+              Width = 743
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 743
+              TabOrder = 0
+              object Label17: TLabel
+                Left = 0
+                Height = 32
+                Top = 0
+                Width = 743
+                Align = alClient
+                Alignment = taCenter
+                Caption = 'Overview'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+            object ToolButton8: TToolButton
+              Left = 824
+              Top = 0
+              Action = ClientMainDMod.ActNavDetail
+            end
+          end
+          object Panel11: TPanel
+            Left = 0
+            Height = 40
+            Top = 488
+            Width = 905
+            Align = alBottom
+            BevelOuter = bvNone
+            ClientHeight = 40
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 1
+            object EditGameText: TEdit
+              Left = 1
+              Height = 23
+              Top = 8
+              Width = 899
+              Anchors = [akTop, akLeft, akRight]
+              MaxLength = 40
+              TabOrder = 0
+            end
+          end
+          object Panel12: TPanel
+            Left = 0
+            Height = 254
+            Top = 34
+            Width = 905
+            Align = alTop
+            BevelOuter = bvNone
+            ClientHeight = 254
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 3
+            object Label18: TLabel
+              Left = 8
+              Height = 15
+              Top = 12
+              Width = 77
+              Caption = 'Game Control:'
+              ParentColor = False
+            end
+            object Button2: TButton
+              Left = 795
+              Height = 25
+              Top = 8
+              Width = 108
+              Action = ClientMainDMod.ActGameControl
+              Anchors = [akTop, akRight]
+              TabOrder = 0
+            end
+            object Label19: TLabel
+              Left = 8
+              Height = 15
+              Top = 48
+              Width = 40
+              Caption = 'Players:'
+              ParentColor = False
+            end
+            object DrawGrid1: TDrawGrid
+              Left = 8
+              Height = 60
+              Top = 72
+              Width = 895
+              Anchors = [akTop, akLeft, akRight]
+              AutoEdit = False
+              ColCount = 4
+              Columns = <              
+                item
+                  Title.Caption = 'Title'
+                  Width = 186
+                end              
+                item
+                  Title.Caption = 'Title'
+                  Width = 186
+                end              
+                item
+                  Title.Caption = 'Title'
+                end              
+                item
+                  Title.Caption = 'Title'
+                end>
+              DefaultColWidth = 186
+              DefaultRowHeight = 54
+              ExtendedSelect = False
+              FixedCols = 0
+              FixedRows = 0
+              Options = [goVertLine, goHorzLine]
+              RowCount = 1
+              ScrollBars = ssNone
+              TabOrder = 1
+              OnDrawCell = DrawGrid1DrawCell
+            end
+            object Label20: TLabel
+              Left = 8
+              Height = 15
+              Top = 200
+              Width = 72
+              Caption = 'Game Round:'
+              ParentColor = False
+            end
+            object LabelGameRound: TLabel
+              Left = 795
+              Height = 15
+              Top = 200
+              Width = 105
+              Anchors = [akTop, akRight]
+              Caption = 'Waiting For Ready...'
+              ParentColor = False
+            end
+            object Label22: TLabel
+              Left = 8
+              Height = 15
+              Top = 232
+              Width = 59
+              Caption = 'Discussion:'
+              ParentColor = False
+            end
+          end
+        end
+        object TbshtDetail: TTabSheet
+          Caption = 'TbshtDetail'
+          ClientHeight = 528
+          ClientWidth = 905
+          object ToolBar8: TToolBar
+            Left = 0
+            Height = 34
+            Top = 0
+            Width = 905
+            AutoSize = True
+            ButtonHeight = 32
+            ButtonWidth = 80
+            Caption = 'ToolBar5'
+            EdgeBorders = [ebBottom]
+            Images = ClientMainDMod.ImageList1
+            List = True
+            ShowCaptions = True
+            TabOrder = 0
+            object ToolButton13: TToolButton
+              Left = 1
+              Top = 0
+              Action = ClientMainDMod.ActNavReturn
+            end
+            object Panel13: TPanel
+              Left = 81
+              Height = 32
+              Top = 0
+              Width = 824
+              BevelOuter = bvNone
+              ClientHeight = 32
+              ClientWidth = 824
+              TabOrder = 0
+              object Label21: TLabel
+                Left = 0
+                Height = 32
+                Top = 0
+                Width = 744
+                Align = alClient
+                Alignment = taCenter
+                BorderSpacing.Right = 80
+                Caption = 'Detail'
+                Layout = tlCenter
+                ParentColor = False
+              end
+            end
+          end
+          object Panel14: TPanel
+            Left = 0
+            Height = 494
+            Top = 34
+            Width = 905
+            Align = alClient
+            BevelOuter = bvNone
+            ClientHeight = 494
+            ClientWidth = 905
+            ParentColor = False
+            TabOrder = 1
+            inline CardHandFrame1: TCardHandFrame
+              Left = 4
+              Top = 246
+              Width = 897
+              Align = alTop
+              BorderSpacing.Around = 4
+              ClientWidth = 897
+            end
+            object Panel15: TPanel
+              Left = 0
+              Height = 242
+              Top = 0
+              Width = 905
+              Align = alTop
+              BevelOuter = bvNone
+              ClientHeight = 242
+              ClientWidth = 905
+              TabOrder = 1
+              object PgctrlDeal: TPageControl
+                Left = 0
+                Height = 242
+                Top = 0
+                Width = 680
+                ActivePage = TbshtDraw
+                Align = alLeft
+                ShowTabs = False
+                TabIndex = 0
+                TabOrder = 0
+                object TbshtDraw: TTabSheet
+                  Caption = 'TbshtDraw'
+                  ClientHeight = 234
+                  ClientWidth = 672
+                  object Panel16: TPanel
+                    Left = 0
+                    Height = 234
+                    Top = 0
+                    Width = 672
+                    Align = alClient
+                    BevelOuter = bvNone
+                    ClientHeight = 234
+                    ClientWidth = 672
+                    ParentColor = False
+                    TabOrder = 0
+                    object Image1: TImage
+                      Left = 8
+                      Height = 178
+                      Top = 8
+                      Width = 128
+                    end
+                    object Button5: TButton
+                      Left = 8
+                      Height = 25
+                      Top = 200
+                      Width = 75
+                      Action = ClientMainDMod.ActGameDrawDeck
+                      TabOrder = 0
+                    end
+                    object Image2: TImage
+                      Left = 256
+                      Height = 178
+                      Top = 8
+                      Width = 128
+                    end
+                    object Button6: TButton
+                      Left = 256
+                      Height = 25
+                      Top = 200
+                      Width = 75
+                      Action = ClientMainDMod.ActGameDrawDiscard
+                      TabOrder = 1
+                    end
+                    object Button7: TButton
+                      Left = 592
+                      Height = 25
+                      Top = 200
+                      Width = 75
+                      Action = ClientMainDMod.ActGameDiscard
+                      TabOrder = 2
+                    end
+                  end
+                end
+                object TbshtGin: TTabSheet
+                  Caption = 'TbshtGin'
+                  ClientHeight = 234
+                  ClientWidth = 672
+                  object Panel17: TPanel
+                    Left = 0
+                    Height = 234
+                    Top = 0
+                    Width = 672
+                    Align = alClient
+                    BevelOuter = bvNone
+                    ClientHeight = 234
+                    ClientWidth = 672
+                    ParentColor = False
+                    TabOrder = 0
+                    inline CardHandFrame2: TCardHandFrame
+                      Height = 234
+                      Width = 672
+                      Align = alClient
+                      ClientHeight = 234
+                      ClientWidth = 672
+                    end
+                  end
+                end
+              end
+              object Panel18: TPanel
+                Left = 680
+                Height = 242
+                Top = 0
+                Width = 225
+                Align = alClient
+                BevelOuter = bvNone
+                ClientHeight = 242
+                ClientWidth = 225
+                TabOrder = 1
+                object ListBox1: TListBox
+                  Left = 4
+                  Height = 180
+                  Top = 4
+                  Width = 217
+                  Align = alTop
+                  BorderSpacing.Around = 4
+                  ExtendedSelect = False
+                  ItemHeight = 0
+                  TabOrder = 0
+                end
+                object Button8: TButton
+                  Left = 4
+                  Height = 25
+                  Top = 204
+                  Width = 75
+                  Action = ClientMainDMod.ActGameBegin
+                  TabOrder = 1
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+    object TbshtConfigure: TTabSheet
+      Caption = 'TbshtConfigure'
+    end
+  end
+  object TlbrMain: TToolBar
+    Left = 0
+    Height = 54
+    Top = 0
+    Width = 921
+    AutoSize = True
+    ButtonHeight = 52
+    ButtonWidth = 100
+    Caption = 'TlbrMain'
+    Images = ClientMainDMod.ImageList1
+    ShowCaptions = True
+    TabOrder = 1
+    object ToolButton1: TToolButton
+      Left = 1
+      Top = 2
+      Action = ClientMainDMod.ActNavConnect
+      Grouped = True
+    end
+    object ToolButton2: TToolButton
+      Left = 101
+      Top = 2
+      Action = ClientMainDMod.ActNavChat
+      Grouped = True
+    end
+    object ToolButton3: TToolButton
+      Left = 201
+      Top = 2
+      Action = ClientMainDMod.ActNavPlay
+      Grouped = True
+    end
+    object ToolButton4: TToolButton
+      Left = 301
+      Top = 2
+      Action = ClientMainDMod.ActNavConfigure
+      Grouped = True
+    end
+  end
+end
