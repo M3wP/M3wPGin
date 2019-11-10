@@ -9,7 +9,7 @@
         <Filename Value="M3wPGinClient.lpr"/>
         <IsPartOfProject Value="True"/>
         <CursorPos X="27" Y="10"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
@@ -18,17 +18,15 @@
         <EditorIndex Value="6"/>
         <TopLine Value="7"/>
         <CursorPos X="42" Y="38"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="CardTypes.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="5"/>
-        <TopLine Value="10"/>
         <CursorPos X="57" Y="34"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
@@ -38,9 +36,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
         <EditorIndex Value="7"/>
-        <TopLine Value="537"/>
-        <CursorPos X="39" Y="563"/>
-        <UsageCount Value="160"/>
+        <TopLine Value="425"/>
+        <CursorPos X="70" Y="463"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit3>
@@ -50,10 +48,11 @@
         <ComponentName Value="ClientMainForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="469"/>
-        <CursorPos X="26" Y="489"/>
-        <UsageCount Value="160"/>
+        <TopLine Value="582"/>
+        <CursorPos X="22" Y="609"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit4>
@@ -66,7 +65,7 @@
         <EditorIndex Value="4"/>
         <TopLine Value="474"/>
         <CursorPos X="34" Y="504"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit5>
@@ -76,7 +75,7 @@
         <EditorIndex Value="8"/>
         <TopLine Value="906"/>
         <CursorPos X="44" Y="934"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
         <Loaded Value="True"/>
       </Unit6>
       <Unit7>
@@ -86,7 +85,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
       </Unit7>
       <Unit8>
         <Filename Value="synalist-code\blcksock.pas"/>
@@ -95,7 +94,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
       </Unit8>
       <Unit9>
         <Filename Value="synalist-code\synsock.pas"/>
@@ -104,7 +103,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="160"/>
+        <UsageCount Value="167"/>
       </Unit9>
       <Unit10>
         <Filename Value="GinClasses.pas"/>
@@ -112,7 +111,7 @@
         <EditorIndex Value="9"/>
         <TopLine Value="131"/>
         <CursorPos X="90" Y="94"/>
-        <UsageCount Value="159"/>
+        <UsageCount Value="166"/>
         <Loaded Value="True"/>
       </Unit10>
       <Unit11>
@@ -122,7 +121,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="159"/>
+        <UsageCount Value="166"/>
       </Unit11>
       <Unit12>
         <Filename Value="D:\lazarus206\lcl\controls.pp"/>
@@ -130,7 +129,7 @@
         <EditorIndex Value="2"/>
         <TopLine Value="2266"/>
         <CursorPos X="15" Y="2290"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="67"/>
         <Loaded Value="True"/>
       </Unit12>
       <Unit13>
@@ -138,129 +137,129 @@
         <EditorIndex Value="3"/>
         <TopLine Value="6178"/>
         <CursorPos X="3" Y="6180"/>
-        <UsageCount Value="63"/>
+        <UsageCount Value="67"/>
         <Loaded Value="True"/>
       </Unit13>
     </Units>
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="631" Column="39" TopLine="605"/>
+        <Caret Line="504" Column="32" TopLine="475"/>
       </Position1>
       <Position2>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="166" Column="19" TopLine="143"/>
+        <Caret Line="604" Column="20" TopLine="574"/>
       </Position2>
       <Position3>
-        <Filename Value="DModClientMain.pas"/>
-        <Caret Line="427" Column="35" TopLine="416"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="645" Column="32" TopLine="612"/>
       </Position3>
       <Position4>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="237" Column="38" TopLine="218"/>
+        <Caret Line="571" Column="33" TopLine="563"/>
       </Position4>
       <Position5>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="540" TopLine="531"/>
+        <Caret Line="27" Column="15" TopLine="4"/>
       </Position5>
       <Position6>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="600" TopLine="572"/>
+        <Caret Line="51" Column="25" TopLine="13"/>
       </Position6>
       <Position7>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="561" TopLine="547"/>
+        <Caret Line="563" Column="39" TopLine="531"/>
       </Position7>
       <Position8>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="589" TopLine="547"/>
+        <Caret Line="27" Column="15" TopLine="4"/>
       </Position8>
       <Position9>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="594" TopLine="572"/>
+        <Caret Line="51" Column="25" TopLine="13"/>
       </Position9>
       <Position10>
-        <Filename Value="DModClientMain.pas"/>
-        <Caret Line="584" TopLine="568"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="504" Column="40" TopLine="481"/>
       </Position10>
       <Position11>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="628" Column="31" TopLine="612"/>
+        <Caret Line="164" Column="89" TopLine="149"/>
       </Position11>
       <Position12>
-        <Filename Value="FormClientMain.pas"/>
-        <Caret Line="148" Column="13" TopLine="143"/>
+        <Filename Value="GinClient.pas"/>
+        <Caret Line="256" Column="47" TopLine="247"/>
       </Position12>
       <Position13>
-        <Filename Value="FormClientMain.pas"/>
-        <Caret Line="235" Column="39" TopLine="202"/>
+        <Filename Value="GinClient.pas"/>
+        <Caret Line="943" Column="48" TopLine="915"/>
       </Position13>
       <Position14>
-        <Filename Value="FormClientMain.pas"/>
+        <Filename Value="GinClient.pas"/>
+        <Caret Line="27" Column="23" TopLine="4"/>
       </Position14>
       <Position15>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="504" Column="32" TopLine="475"/>
+        <Caret Line="158" Column="24" TopLine="149"/>
       </Position15>
       <Position16>
-        <Filename Value="FormClientMain.pas"/>
-        <Caret Line="604" Column="20" TopLine="574"/>
+        <Filename Value="CardTypes.pas"/>
+        <Caret Line="164" Column="5" TopLine="130"/>
       </Position16>
       <Position17>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="645" Column="32" TopLine="612"/>
+        <Caret Line="488" Column="45" TopLine="469"/>
       </Position17>
       <Position18>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="571" Column="33" TopLine="563"/>
+        <Caret Line="563" Column="39" TopLine="537"/>
       </Position18>
       <Position19>
         <Filename Value="DModClientMain.pas"/>
-        <Caret Line="27" Column="15" TopLine="4"/>
       </Position19>
       <Position20>
-        <Filename Value="DModClientMain.pas"/>
-        <Caret Line="51" Column="25" TopLine="13"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="18" Column="27"/>
       </Position20>
       <Position21>
-        <Filename Value="DModClientMain.pas"/>
-        <Caret Line="563" Column="39" TopLine="531"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="202" TopLine="187"/>
       </Position21>
       <Position22>
-        <Filename Value="DModClientMain.pas"/>
-        <Caret Line="27" Column="15" TopLine="4"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="206" Column="38" TopLine="178"/>
       </Position22>
       <Position23>
-        <Filename Value="DModClientMain.pas"/>
-        <Caret Line="51" Column="25" TopLine="13"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="205" Column="38" TopLine="177"/>
       </Position23>
       <Position24>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="504" Column="40" TopLine="481"/>
+        <Caret Line="204" Column="38" TopLine="176"/>
       </Position24>
       <Position25>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="164" Column="89" TopLine="149"/>
+        <Caret Line="203" Column="26" TopLine="178"/>
       </Position25>
       <Position26>
-        <Filename Value="GinClient.pas"/>
-        <Caret Line="256" Column="47" TopLine="247"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="202" Column="26" TopLine="177"/>
       </Position26>
       <Position27>
-        <Filename Value="GinClient.pas"/>
-        <Caret Line="943" Column="48" TopLine="915"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="201" Column="26" TopLine="176"/>
       </Position27>
       <Position28>
-        <Filename Value="GinClient.pas"/>
-        <Caret Line="27" Column="23" TopLine="4"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="200" Column="26" TopLine="175"/>
       </Position28>
       <Position29>
         <Filename Value="FormClientMain.pas"/>
-        <Caret Line="158" Column="24" TopLine="149"/>
+        <Caret Line="198" Column="52" TopLine="175"/>
       </Position29>
       <Position30>
-        <Filename Value="CardTypes.pas"/>
-        <Caret Line="164" Column="5" TopLine="130"/>
+        <Filename Value="FormClientMain.pas"/>
+        <Caret Line="164" Column="37" TopLine="138"/>
       </Position30>
     </JumpHistory>
     <RunParams>

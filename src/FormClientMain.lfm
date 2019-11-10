@@ -18,10 +18,10 @@ object ClientMainForm: TClientMainForm
     Height = 544
     Top = 54
     Width = 921
-    ActivePage = TbshtConnect
+    ActivePage = TbshtPlay
     Align = alClient
     ShowTabs = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TbshtConnect: TTabSheet
       ClientHeight = 536
@@ -518,10 +518,10 @@ object ClientMainForm: TClientMainForm
         Height = 536
         Top = 0
         Width = 913
-        ActivePage = TbshtStart
+        ActivePage = TbshtDetail
         Align = alClient
         ShowTabs = False
-        TabIndex = 0
+        TabIndex = 2
         TabOrder = 0
         object TbshtStart: TTabSheet
           Caption = 'TbshtLobby'
@@ -885,54 +885,54 @@ object ClientMainForm: TClientMainForm
             Left = 0
             Height = 494
             Top = 34
-            Width = 905
+            Width = 696
             Align = alClient
             BevelOuter = bvNone
             ClientHeight = 494
-            ClientWidth = 905
+            ClientWidth = 696
             ParentColor = False
             TabOrder = 1
             inline CardHandFrame1: TCardHandFrame
               Left = 4
               Top = 246
-              Width = 897
+              Width = 688
               Align = alTop
               BorderSpacing.Around = 4
-              ClientWidth = 897
+              ClientWidth = 688
             end
             object Panel15: TPanel
               Left = 0
               Height = 242
               Top = 0
-              Width = 905
+              Width = 696
               Align = alTop
               BevelOuter = bvNone
               ClientHeight = 242
-              ClientWidth = 905
+              ClientWidth = 696
               TabOrder = 1
               object PgctrlDeal: TPageControl
                 Left = 0
                 Height = 242
                 Top = 0
-                Width = 680
+                Width = 696
                 ActivePage = TbshtDraw
-                Align = alLeft
+                Align = alTop
                 ShowTabs = False
                 TabIndex = 0
                 TabOrder = 0
                 object TbshtDraw: TTabSheet
                   Caption = 'TbshtDraw'
                   ClientHeight = 234
-                  ClientWidth = 672
+                  ClientWidth = 688
                   object Panel16: TPanel
                     Left = 0
                     Height = 234
                     Top = 0
-                    Width = 672
+                    Width = 688
                     Align = alClient
                     BevelOuter = bvNone
                     ClientHeight = 234
-                    ClientWidth = 672
+                    ClientWidth = 688
                     ParentColor = False
                     TabOrder = 0
                     object Image1: TImage
@@ -940,6 +940,7 @@ object ClientMainForm: TClientMainForm
                       Height = 178
                       Top = 8
                       Width = 128
+                      OnDblClick = Image1DblClick
                     end
                     object Button5: TButton
                       Left = 8
@@ -954,6 +955,7 @@ object ClientMainForm: TClientMainForm
                       Height = 178
                       Top = 8
                       Width = 128
+                      OnDblClick = Image2DblClick
                     end
                     object Button6: TButton
                       Left = 256
@@ -998,36 +1000,37 @@ object ClientMainForm: TClientMainForm
                   end
                 end
               end
-              object Panel18: TPanel
-                Left = 680
-                Height = 242
-                Top = 0
-                Width = 225
-                Align = alClient
-                BevelOuter = bvNone
-                ClientHeight = 242
-                ClientWidth = 225
-                TabOrder = 1
-                object ListBox1: TListBox
-                  Left = 4
-                  Height = 180
-                  Top = 4
-                  Width = 217
-                  Align = alTop
-                  BorderSpacing.Around = 4
-                  ExtendedSelect = False
-                  ItemHeight = 0
-                  TabOrder = 0
-                end
-                object Button8: TButton
-                  Left = 4
-                  Height = 25
-                  Top = 204
-                  Width = 75
-                  Action = ClientMainDMod.ActGameBegin
-                  TabOrder = 1
-                end
-              end
+            end
+          end
+          object Panel18: TPanel
+            Left = 696
+            Height = 494
+            Top = 34
+            Width = 209
+            Align = alRight
+            BevelOuter = bvNone
+            ClientHeight = 494
+            ClientWidth = 209
+            ParentColor = False
+            TabOrder = 2
+            object ListBox1: TListBox
+              Left = 4
+              Height = 444
+              Top = 46
+              Width = 201
+              Align = alBottom
+              BorderSpacing.Around = 4
+              ExtendedSelect = False
+              ItemHeight = 0
+              TabOrder = 0
+            end
+            object Button8: TButton
+              Left = 4
+              Height = 25
+              Top = 8
+              Width = 75
+              Action = ClientMainDMod.ActGameBegin
+              TabOrder = 1
             end
           end
         end

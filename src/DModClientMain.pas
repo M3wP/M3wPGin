@@ -460,7 +460,7 @@ procedure TClientMainDMod.DoConnect;
 	try
 	    Connection.Connected:= False;
 	    Connection.Socket.ConnectionTimeout:= 5000;
-	    Connection.Socket.Connect(ClientMainForm.EditHost.Text, '7520');
+	    Connection.Socket.Connect(ClientMainForm.EditHost.Text, '7639');
 
 		if  Assigned(Client.Server) then
 			begin

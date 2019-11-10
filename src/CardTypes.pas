@@ -109,7 +109,7 @@ procedure ShuffleStandardDeck(var ADeck: TStandardDeck);
 	begin
 	s:= [];
 
-    for  i:= Low(TPlayingCard) to High(TPlayingCard) do
+    for i:= Low(TPlayingCard) to High(TPlayingCard) do
 		while True do
 			begin
             n:= Random(High(TPlayingCard)) + Low(TPlayingCard);

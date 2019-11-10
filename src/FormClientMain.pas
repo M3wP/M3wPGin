@@ -138,6 +138,8 @@ type
   		procedure EditRoomTextKeyPress(Sender: TObject; var Key: char);
 		procedure FormCreate(Sender: TObject);
   		procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+		procedure Image1DblClick(Sender: TObject);
+		procedure Image2DblClick(Sender: TObject);
 	private
         FDiscardLast,
         FDiscardThis: TCardIndex;
@@ -192,6 +194,16 @@ procedure TClientMainForm.FormKeyDown(Sender: TObject; var Key: Word;
 	lmkey.KeyData:= 0;
 
 	ClientMainDMod.ActlstNavigate.IsShortCut(lmkey);
+	end;
+
+procedure TClientMainForm.Image1DblClick(Sender: TObject);
+	begin
+    ClientMainDMod.ActGameDrawDeck.Execute;
+	end;
+
+procedure TClientMainForm.Image2DblClick(Sender: TObject);
+	begin
+    ClientMainDMod.ActGameDrawDiscard.Execute;
 	end;
 
 procedure TClientMainForm.AddGameInfo(const AString: string);
@@ -592,7 +604,12 @@ procedure TClientMainForm.MsgUpdateDiscard(var AMessage: TLMessage);
 			CardHandFrame1.DeleteCard(i);
 
             Client.Game.Drawn:= False;
-			end;
+
+            AddGameInfo('You discard ' + CardIndexToText(FDiscardThis));
+			end
+    	else
+        	AddGameInfo(IntToStr(AMessage.wParam + 1) + 'P discards ' +
+            		CardIndexToText(FDiscardThis));
 		end;
 
  	Image2.Picture.Assign(CardGraphics[FDiscardThis]);

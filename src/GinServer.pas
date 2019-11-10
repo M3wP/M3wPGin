@@ -2611,6 +2611,67 @@ function TPlayGame.CheckForGin(const ASlot: Integer): Boolean;
     for n:= Low(TCardFace) to High(TCardFace) do
     	SetLength(sets[n], 0);
 
+//	We have to check if they are all sets first because otherwise, we'd need to
+//	later check to completely dissolve straights, as well.
+
+	for i:= 0 to High(Slots[ASlot].Cards) do
+    	if  Slots[ASlot].Cards[i] <> 0 then
+        	begin
+			Include(spare, Slots[ASlot].Cards[i]);
+            Inc(scnt);
+			end;
+
+//	Collate sets
+   	for j:= Low(TCardIndex) to High(TCardIndex) do
+   		if  j in spare then
+   			begin
+   	        n:= ARR_REC_DECKCARDS[j].Face;
+
+   			SetLength(sets[n], Length(sets[n]) + 1);
+   	        sets[n][High(sets[n])]:= j;
+
+   			Exclude(spare, j);
+   			Dec(scnt);
+   			end;
+
+    Assert(scnt = 0, 'Error in initial gin collation logic!');
+
+   	AddLogMessage(slkDebug, 'Sets first pass');
+   	for n:= Low(sets) to High(sets) do
+   	    if  Length(sets[n]) > 0 then
+   			begin
+   			t:= #9;
+   	        for j:= 0 to High(sets[n]) do
+   	        	t:= t + CardIndexToIdent(sets[n][j]) + ' ';
+
+   	        AddLogMessage(slkDebug, t);
+   			end;
+
+//	Check GIN at this point
+	f:= True;
+
+	for n:= Low(sets) to High(sets) do
+		if  (Length(sets[n]) > 0)
+		and (Length(sets[n]) < 3) then
+			begin
+			f:= False;
+			Break;
+			end;
+
+    if  f then
+        begin
+    	Result:= f;
+        Exit;
+		end;
+
+//	Continue processing...
+
+	spare:= [];
+	scnt:= 0;
+
+    for n:= Low(TCardFace) to High(TCardFace) do
+    	SetLength(sets[n], 0);
+
 //	Collect them into suits
 	for i:= 0 to High(Slots[ASlot].Cards) do
         if  Slots[ASlot].Cards[i] <> 0 then
@@ -2762,7 +2823,7 @@ function TPlayGame.CheckForGin(const ASlot: Integer): Boolean;
 
 	Assert(scnt = 0, 'Error in gin collation logic!');
 
-	AddLogMessage(slkDebug, 'Sets first pass');
+	AddLogMessage(slkDebug, 'Sets second pass');
 	for n:= Low(sets) to High(sets) do
 	    if  Length(sets[n]) > 0 then
 			begin
@@ -2855,7 +2916,7 @@ function TPlayGame.CheckForGin(const ASlot: Integer): Boolean;
 	        AddLogMessage(slkDebug, t);
 			end;
 
-	AddLogMessage(slkDebug, 'Sets second pass');
+	AddLogMessage(slkDebug, 'Sets third pass');
 	for n:= Low(sets) to High(sets) do
 	    if  Length(sets[n]) > 0 then
 			begin

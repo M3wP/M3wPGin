@@ -90,7 +90,7 @@ procedure TM3wPGinCLIServer.DoRun;
 			end;
 		end;
 
-    TCPListener:= TTCPListener.Create('7520');
+    TCPListener:= TTCPListener.Create('7639');
 
 	ServerDisp:= TServerDispatcher.Create;
 

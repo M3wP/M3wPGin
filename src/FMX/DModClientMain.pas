@@ -72,7 +72,7 @@ procedure TClientMainDMod.DoConnect;
 
 		Connection.Socket.ConnectTimeout:= 5000;
 		Connection.Socket.Host:= ClientMainForm.EditHostName.Text;
-		Connection.Socket.Port:= 7520;
+		Connection.Socket.Port:= 7639;
 
 		try
 			Connection.Socket.Connect;
