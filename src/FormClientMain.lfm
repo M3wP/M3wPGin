@@ -18,20 +18,20 @@ object ClientMainForm: TClientMainForm
     Height = 544
     Top = 54
     Width = 921
-    ActivePage = TbshtPlay
+    ActivePage = TbshtConnect
     Align = alClient
     ShowTabs = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object TbshtConnect: TTabSheet
-      ClientHeight = 536
-      ClientWidth = 913
+      ClientHeight = 540
+      ClientWidth = 917
       ImageIndex = 0
       object PgctrlConnect: TPageControl
         Left = 0
-        Height = 536
+        Height = 540
         Top = 0
-        Width = 913
+        Width = 917
         ActivePage = TbshtHost
         Align = alClient
         ShowTabs = False
@@ -39,41 +39,41 @@ object ClientMainForm: TClientMainForm
         TabOrder = 0
         object TbshtHost: TTabSheet
           Caption = 'TbshtHost'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 536
+          ClientWidth = 913
           object Panel2: TPanel
             Left = 0
             Height = 182
             Top = 34
-            Width = 905
+            Width = 913
             Align = alTop
             BevelOuter = bvNone
             ClientHeight = 182
-            ClientWidth = 905
+            ClientWidth = 913
             ParentColor = False
             TabOrder = 0
             object Label1: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 12
-              Width = 63
+              Width = 79
               Caption = 'Host Name:'
               ParentColor = False
             end
             object EditHost: TEdit
               Left = 144
-              Height = 23
+              Height = 27
               Top = 8
-              Width = 344
+              Width = 352
               Anchors = [akTop, akLeft, akRight]
               TabOrder = 0
               Text = '127.0.0.1'
             end
             object EditUserName: TEdit
               Left = 144
-              Height = 23
+              Height = 27
               Top = 40
-              Width = 120
+              Width = 128
               Anchors = [akTop, akLeft, akRight]
               MaxLength = 8
               TabOrder = 1
@@ -81,14 +81,14 @@ object ClientMainForm: TClientMainForm
             end
             object Label2: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 44
-              Width = 61
+              Width = 78
               Caption = 'User Name:'
               ParentColor = False
             end
             object Button1: TButton
-              Left = 272
+              Left = 280
               Height = 25
               Top = 40
               Width = 75
@@ -106,9 +106,9 @@ object ClientMainForm: TClientMainForm
             end
             object EditHostInfo: TEdit
               Left = 144
-              Height = 23
+              Height = 27
               Top = 120
-              Width = 756
+              Width = 764
               Anchors = [akTop, akLeft, akRight]
               Color = clBtnFace
               ReadOnly = True
@@ -116,26 +116,26 @@ object ClientMainForm: TClientMainForm
             end
             object Label3: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 124
-              Width = 52
+              Width = 66
               Caption = 'Host Info:'
               ParentColor = False
             end
             object Label4: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 160
-              Width = 89
+              Width = 110
               Caption = 'Connection Info:'
               ParentColor = False
             end
           end
           object MemoHost: TMemo
             Left = 0
-            Height = 312
+            Height = 320
             Top = 216
-            Width = 905
+            Width = 913
             Align = alClient
             ReadOnly = True
             ScrollBars = ssAutoVertical
@@ -145,7 +145,7 @@ object ClientMainForm: TClientMainForm
             Left = 0
             Height = 34
             Top = 0
-            Width = 905
+            Width = 913
             AutoSize = True
             ButtonHeight = 32
             ButtonWidth = 80
@@ -186,8 +186,8 @@ object ClientMainForm: TClientMainForm
         end
         object TbshtDebug: TTabSheet
           Caption = 'TbshtDebug'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 536
+          ClientWidth = 913
           object ToolBar3: TToolBar
             Left = 0
             Height = 34
@@ -245,8 +245,8 @@ object ClientMainForm: TClientMainForm
     end
     object TbshtChat: TTabSheet
       Caption = 'TbshtChat'
-      ClientHeight = 536
-      ClientWidth = 913
+      ClientHeight = 540
+      ClientWidth = 917
       object PgctrlChat: TPageControl
         Left = 0
         Height = 536
@@ -259,8 +259,8 @@ object ClientMainForm: TClientMainForm
         TabOrder = 0
         object TbshtLobby: TTabSheet
           Caption = 'TbshtLobby'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 532
+          ClientWidth = 909
           object ToolBar4: TToolBar
             Left = 0
             Height = 34
@@ -286,8 +286,8 @@ object ClientMainForm: TClientMainForm
               Top = 0
               Width = 824
               BevelOuter = bvNone
-              ClientHeight = 32
-              ClientWidth = 824
+              ClientHeight = 28
+              ClientWidth = 820
               TabOrder = 0
               object Label6: TLabel
                 Left = 80
@@ -310,8 +310,8 @@ object ClientMainForm: TClientMainForm
             Width = 905
             Align = alTop
             BevelOuter = bvNone
-            ClientHeight = 134
-            ClientWidth = 905
+            ClientHeight = 130
+            ClientWidth = 901
             ParentColor = False
             TabOrder = 1
             object EditRoom: TEdit
@@ -394,8 +394,8 @@ object ClientMainForm: TClientMainForm
         end
         object TbshtRoom: TTabSheet
           Caption = 'TbshtRoom'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 532
+          ClientWidth = 909
           object MemoRoom: TMemo
             Left = 0
             Height = 454
@@ -430,8 +430,8 @@ object ClientMainForm: TClientMainForm
               Top = 0
               Width = 744
               BevelOuter = bvNone
-              ClientHeight = 32
-              ClientWidth = 744
+              ClientHeight = 28
+              ClientWidth = 740
               TabOrder = 0
               object Label9: TLabel
                 Left = 0
@@ -458,8 +458,8 @@ object ClientMainForm: TClientMainForm
             Width = 905
             Align = alBottom
             BevelOuter = bvNone
-            ClientHeight = 40
-            ClientWidth = 905
+            ClientHeight = 36
+            ClientWidth = 901
             ParentColor = False
             TabOrder = 1
             object EditRoomText: TEdit
@@ -479,8 +479,8 @@ object ClientMainForm: TClientMainForm
             Top = 34
             Width = 157
             Anchors = [akTop, akRight, akBottom]
-            ClientHeight = 454
-            ClientWidth = 157
+            ClientHeight = 450
+            ClientWidth = 153
             ParentColor = False
             TabOrder = 3
             Visible = False
@@ -492,8 +492,9 @@ object ClientMainForm: TClientMainForm
               Align = alClient
               BorderSpacing.Around = 8
               ItemHeight = 0
-              ScrollWidth = 132
+              ScrollWidth = 135
               TabOrder = 0
+              TopIndex = -1
             end
             object Label12: TLabel
               Left = 9
@@ -511,27 +512,27 @@ object ClientMainForm: TClientMainForm
     end
     object TbshtPlay: TTabSheet
       Caption = 'TbshtPlay'
-      ClientHeight = 536
-      ClientWidth = 913
+      ClientHeight = 540
+      ClientWidth = 917
       object PgctrlPlay: TPageControl
         Left = 0
-        Height = 536
+        Height = 540
         Top = 0
-        Width = 913
-        ActivePage = TbshtDetail
+        Width = 917
+        ActivePage = TbshtStart
         Align = alClient
         ShowTabs = False
-        TabIndex = 2
+        TabIndex = 0
         TabOrder = 0
         object TbshtStart: TTabSheet
           Caption = 'TbshtLobby'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 536
+          ClientWidth = 913
           object ToolBar6: TToolBar
             Left = 0
             Height = 34
             Top = 0
-            Width = 905
+            Width = 913
             AutoSize = True
             ButtonHeight = 32
             ButtonWidth = 80
@@ -573,48 +574,48 @@ object ClientMainForm: TClientMainForm
             Left = 0
             Height = 134
             Top = 34
-            Width = 905
+            Width = 913
             Align = alTop
             BevelOuter = bvNone
             ClientHeight = 134
-            ClientWidth = 905
+            ClientWidth = 913
             ParentColor = False
             TabOrder = 1
             object EditGame: TEdit
               Left = 144
-              Height = 23
+              Height = 27
               Top = 8
-              Width = 120
+              Width = 128
               Anchors = [akTop, akLeft, akRight]
               MaxLength = 8
               TabOrder = 0
             end
             object Label14: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 12
-              Width = 34
+              Width = 43
               Caption = 'Game:'
               ParentColor = False
             end
             object EditGamePwd: TEdit
               Left = 144
-              Height = 23
+              Height = 27
               Top = 40
-              Width = 120
+              Width = 128
               Anchors = [akTop, akLeft, akRight]
               TabOrder = 1
             end
             object Label15: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 44
-              Width = 53
+              Width = 70
               Caption = 'Password:'
               ParentColor = False
             end
             object ButtonGameJoin: TButton
-              Left = 272
+              Left = 280
               Height = 25
               Top = 40
               Width = 75
@@ -623,7 +624,7 @@ object ClientMainForm: TClientMainForm
               TabOrder = 2
             end
             object Button4: TButton
-              Left = 272
+              Left = 280
               Height = 25
               Top = 69
               Width = 75
@@ -633,26 +634,26 @@ object ClientMainForm: TClientMainForm
             end
             object Label16: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 112
-              Width = 38
+              Width = 49
               Caption = 'Listing:'
               ParentColor = False
             end
             object Label26: TLabel
               Left = 8
-              Height = 15
+              Height = 17
               Top = 69
-              Width = 62
+              Width = 82
               Caption = '(for private)'
               ParentColor = False
             end
           end
           object MemoGameList: TMemo
             Left = 0
-            Height = 360
+            Height = 368
             Top = 168
-            Width = 905
+            Width = 913
             Align = alClient
             ScrollBars = ssAutoVertical
             TabOrder = 2
@@ -660,8 +661,8 @@ object ClientMainForm: TClientMainForm
         end
         object TbshtOverview: TTabSheet
           Caption = 'TbshtRoom'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 536
+          ClientWidth = 913
           object MemoGame: TMemo
             Left = 0
             Height = 200
@@ -837,13 +838,13 @@ object ClientMainForm: TClientMainForm
         end
         object TbshtDetail: TTabSheet
           Caption = 'TbshtDetail'
-          ClientHeight = 528
-          ClientWidth = 905
+          ClientHeight = 536
+          ClientWidth = 913
           object ToolBar8: TToolBar
             Left = 0
             Height = 34
             Top = 0
-            Width = 905
+            Width = 913
             AutoSize = True
             ButtonHeight = 32
             ButtonWidth = 80
@@ -883,38 +884,38 @@ object ClientMainForm: TClientMainForm
           end
           object Panel14: TPanel
             Left = 0
-            Height = 494
+            Height = 502
             Top = 34
-            Width = 696
+            Width = 728
             Align = alClient
             BevelOuter = bvNone
-            ClientHeight = 494
-            ClientWidth = 696
+            ClientHeight = 502
+            ClientWidth = 728
             ParentColor = False
             TabOrder = 1
             inline CardHandFrame1: TCardHandFrame
               Left = 4
               Top = 246
-              Width = 688
+              Width = 720
               Align = alTop
               BorderSpacing.Around = 4
-              ClientWidth = 688
+              ClientWidth = 720
             end
             object Panel15: TPanel
               Left = 0
               Height = 242
               Top = 0
-              Width = 696
+              Width = 728
               Align = alTop
               BevelOuter = bvNone
               ClientHeight = 242
-              ClientWidth = 696
+              ClientWidth = 728
               TabOrder = 1
               object PgctrlDeal: TPageControl
                 Left = 0
                 Height = 242
                 Top = 0
-                Width = 696
+                Width = 728
                 ActivePage = TbshtDraw
                 Align = alTop
                 ShowTabs = False
@@ -922,17 +923,17 @@ object ClientMainForm: TClientMainForm
                 TabOrder = 0
                 object TbshtDraw: TTabSheet
                   Caption = 'TbshtDraw'
-                  ClientHeight = 234
-                  ClientWidth = 688
+                  ClientHeight = 238
+                  ClientWidth = 724
                   object Panel16: TPanel
                     Left = 0
-                    Height = 234
+                    Height = 238
                     Top = 0
-                    Width = 688
+                    Width = 724
                     Align = alClient
                     BevelOuter = bvNone
-                    ClientHeight = 234
-                    ClientWidth = 688
+                    ClientHeight = 238
+                    ClientWidth = 724
                     ParentColor = False
                     TabOrder = 0
                     object Image1: TImage
@@ -977,8 +978,8 @@ object ClientMainForm: TClientMainForm
                 end
                 object TbshtGin: TTabSheet
                   Caption = 'TbshtGin'
-                  ClientHeight = 234
-                  ClientWidth = 672
+                  ClientHeight = 238
+                  ClientWidth = 724
                   object Panel17: TPanel
                     Left = 0
                     Height = 234
@@ -1003,26 +1004,28 @@ object ClientMainForm: TClientMainForm
             end
           end
           object Panel18: TPanel
-            Left = 696
-            Height = 494
+            Left = 728
+            Height = 502
             Top = 34
-            Width = 209
+            Width = 185
             Align = alRight
             BevelOuter = bvNone
-            ClientHeight = 494
-            ClientWidth = 209
+            ClientHeight = 502
+            ClientWidth = 185
             ParentColor = False
             TabOrder = 2
             object ListBox1: TListBox
               Left = 4
               Height = 444
-              Top = 46
-              Width = 201
+              Top = 54
+              Width = 177
               Align = alBottom
               BorderSpacing.Around = 4
               ExtendedSelect = False
               ItemHeight = 0
+              ScrollWidth = 175
               TabOrder = 0
+              TopIndex = -1
             end
             object Button8: TButton
               Left = 4

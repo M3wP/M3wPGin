@@ -1831,7 +1831,7 @@ procedure TPlayGame.ProcessPlayerMessage(APlayer: TPlayer;
                         Slots[s].FirstCard:= c;
 						Inc(ReadyCount);
 						end
-					else if  not Slots[i].Drawn then
+					else if  not Slots[s].Drawn then
 						begin
 						if  AMessage.Data[2] = 0 then
 							begin
