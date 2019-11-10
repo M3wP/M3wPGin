@@ -271,19 +271,19 @@ procedure TClientMainForm.DrawGrid1DrawCell(Sender: TObject; aCol,
 	v: string;
 
 	begin
-	if  Assigned(ClientMainDMod.Client.Game) then
+	if  Assigned(Client.Game) then
 		begin
         s:= ACol;
 
-    	i:= Ord(ClientMainDMod.Client.Game.Slots[s].State);
-    	if  ClientMainDMod.Client.Game.Slots[s].State > psNone then
-    		n:= string(ClientMainDMod.Client.Game.Slots[s].Name)
+    	i:= Ord(Client.Game.Slots[s].State);
+    	if  Client.Game.Slots[s].State > psNone then
+    		n:= string(Client.Game.Slots[s].Name)
     	else
     		n:= '';
 
-    	case ClientMainDMod.Client.Game.Slots[s].State of
+    	case Client.Game.Slots[s].State of
     		psNone:
-    			if  ClientMainDMod.Client.Game.State >= gsPreparing then
+    			if  Client.Game.State >= gsPreparing then
     				v:= ''
     			else
     				v:= 'Available...';
@@ -294,13 +294,13 @@ procedure TClientMainForm.DrawGrid1DrawCell(Sender: TObject; aCol,
     		psPreparing:
     			v:= 'Waiting for First Draw';
     		psWaiting..psWinner:
-    			if  (ClientMainDMod.Client.Game.Slots[s].State = psWaiting)
-    			and (ClientMainDMod.Client.Game.Round = 0) then
+    			if  (Client.Game.Slots[s].State = psWaiting)
+    			and (Client.Game.Round = 0) then
     				v:= 'Drew:  ' + CardIndexToText(
-							ClientMainDMod.Client.Game.Slots[s].FirstCard)
+							Client.Game.Slots[s].FirstCard)
     			else
     				v:= 'Score:  ' +
-							IntToStr(ClientMainDMod.Client.Game.Slots[s].Score);
+							IntToStr(Client.Game.Slots[s].Score);
     		else
     			v:= '';
     		end;
@@ -334,17 +334,17 @@ procedure TClientMainForm.DrawGrid1DrawCell(Sender: TObject; aCol,
 
 procedure TClientMainForm.MsgUpdateHost(var AMessage: TLMessage);
 	begin
-	if  Assigned(ClientMainDMod.Client.Server) then
-		EditHostInfo.Text:= ClientMainDMod.Client.Server.Name + ' ' +
-				ClientMainDMod.Client.Server.Host + ' ' +
-				ClientMainDMod.Client.Server.Version
+	if  Assigned(Client.Server) then
+		EditHostInfo.Text:= Client.Server.Name + ' ' +
+				Client.Server.Host + ' ' +
+				Client.Server.Version
 	else
 		EditHostInfo.Text:= '';
 	end;
 
 procedure TClientMainForm.MsgUpdateIdent(var AMessage: TLMessage);
 	begin
-    EditUserName.Text:= ClientMainDMod.Client.OurIdent;
+    EditUserName.Text:= Client.OurIdent;
 	end;
 
 procedure TClientMainForm.MsgUpdateRoomList(var AMessage: TLMessage);
@@ -367,7 +367,7 @@ procedure TClientMainForm.MsgUpdateRoom(var AMessage: TLMessage);
 		end
 	else
 		begin
-        EditRoom.Text:= ClientMainDMod.Client.Room;
+        EditRoom.Text:= Client.Room;
 
         EditRoom.Enabled:= False;
 		EditRoomPwd.Enabled:= False;
@@ -416,50 +416,47 @@ procedure TClientMainForm.MsgUpdateOurState(var AMessage: TLMessage);
 	begin
 	AddLogMessage(slkDebug, 'UpdateOurState.');
 
-    if  Assigned(ClientMainDMod.Client.Game) then
+    if  Assigned(Client.Game) then
 		begin
-		if  ClientMainDMod.Client.Game.State > gsPreparing then
-			LabelGameRound.Caption:= IntToSTr(ClientMainDMod.Client.Game.Round)
-		else if ClientMainDMod.Client.Game.State = gsWaiting then
+		if  Client.Game.State > gsPreparing then
+			LabelGameRound.Caption:= IntToSTr(Client.Game.Round)
+		else if Client.Game.State = gsWaiting then
 			LabelGameRound.Caption:= 'Waiting for all Ready...'
 		else
   			LabelGameRound.Caption:= 'Waiting for all Draw First...';
 
-        if  ClientMainDMod.Client.Game.State = gsPlaying then
+        if  Client.Game.State = gsPlaying then
 			begin
 			ClientMainDMod.ActGameControl.Tag:= 4;
 			ClientMainDMod.ActGameControl.Caption:= 'Playing';
 
             ClientMainDMod.ActGameDrawDeck.Enabled:=
-            		(ClientMainDMod.Client.Game.Slots[
-                    ClientMainDMod.Client.Game.OurSlot].State = psPlaying) and
-                    (not ClientMainDMod.Client.Game.Drawn);
+            		(Client.Game.Slots[Client.Game.OurSlot].State = psPlaying) and
+                    (not Client.Game.Drawn);
 
             ClientMainDMod.ActGameDrawDiscard.Enabled:=
             		ClientMainDMod.ActGameDrawDeck.Enabled;
 
 			end
-		else if  (ClientMainDMod.Client.Game.OurSlot = -1)
-		or  (ClientMainDMod.Client.Game.Slots[
-				ClientMainDMod.Client.Game.OurSlot].State in [psNone, psWaiting]) then
+		else if  (Client.Game.OurSlot = -1)
+		or  (Client.Game.Slots[Client.Game.OurSlot].State in [psNone, psWaiting]) then
 			begin
 			ClientMainDMod.ActGameControl.Tag:= 0;
 			ClientMainDMod.ActGameControl.Caption:= 'Waiting';
 			end
-		else if ClientMainDMod.Client.Game.Slots[
-				ClientMainDMod.Client.Game.OurSlot].State = psIdle then
+		else if Client.Game.Slots[
+				Client.Game.OurSlot].State = psIdle then
 			begin
 			ClientMainDMod.ActGameControl.Tag:= 1;
 			ClientMainDMod.ActGameControl.Caption:= 'Ready';
 			end
-		else if ClientMainDMod.Client.Game.Slots[
-				ClientMainDMod.Client.Game.OurSlot].State = psReady then
+		else if Client.Game.Slots[Client.Game.OurSlot].State = psReady then
 			begin
 			ClientMainDMod.ActGameControl.Tag:= 2;
 			ClientMainDMod.ActGameControl.Caption:= 'Not Ready';
 			end
-		else if ClientMainDMod.Client.Game.Slots[
-				ClientMainDMod.Client.Game.OurSlot].State = psPreparing then
+		else if Client.Game.Slots[
+				Client.Game.OurSlot].State = psPreparing then
 			begin
 			ClientMainDMod.ActGameControl.Tag:= 3;
 			ClientMainDMod.ActGameControl.Caption:= 'Draw for First';
@@ -482,15 +479,20 @@ procedure TClientMainForm.MsgUpdateGame(var AMessage: TLMessage);
 		if  PgctrlPlay.ActivePage = TbshtDetail then
 			PgctrlPlay.ActivePage:= TbshtOverview;
 
-        CardHandFrame1.ClearCards;
-		end
+        ClientMainDMod.TimerGIN.Enabled:= False;
+        end
 	else
 		begin
-        EditGame.Text:= ClientMainDMod.Client.Game.Ident;
+        EditGame.Text:= Client.Game.Ident;
 
         EditGame.Enabled:= False;
 		EditGamePwd.Enabled:= False;
 		ButtonGameJoin.Action:= ClientMainDMod.ActGamePart;
+
+        CardHandFrame1.ClearCards;
+        CardHandFrame2.ClearCards;
+
+        PgctrlDeal.ActivePage:= TbshtDraw;
 		end;
 	end;
 
@@ -504,6 +506,8 @@ procedure TClientMainForm.MsgUpdateNewDeal(var AMessage: TLMessage);
 //
 //	CardHandFrame1.ClearCards;
 
+    ClientMainDMod.ActGameBegin.Enabled:= False;
+
     ListBox1.Items.Clear;
     AddGameInfo('A hand was dealt');
     end;
@@ -515,7 +519,7 @@ procedure TClientMainForm.MsgUpdateDrawCard(var AMessage: TLMessage);
     begin
     CardHandFrame1.AddCard(AMessage.WParam);
 
-    if  ClientMainDMod.Client.Game.Drawn then
+    if  Client.Game.Drawn then
     	begin
     	ClientMainDMod.ActGameDrawDeck.Enabled:= False;
     	ClientMainDMod.ActGameDrawDiscard.Enabled:= False;
@@ -575,7 +579,7 @@ procedure TClientMainForm.MsgUpdateDiscard(var AMessage: TLMessage);
     	FDiscardLast:= FDiscardThis;
     	FDiscardThis:= AMessage.lParam;
 
-        if  AMessage.wParam = ClientMainDMod.Client.Game.OurSlot then
+        if  AMessage.wParam = Client.Game.OurSlot then
         	begin
             i:= 0;
             for s:= 0 to CardHandFrame1.CardCount - 1 do
@@ -587,7 +591,7 @@ procedure TClientMainForm.MsgUpdateDiscard(var AMessage: TLMessage);
 
 			CardHandFrame1.DeleteCard(i);
 
-            ClientMainDMod.Client.Game.Drawn:= False;
+            Client.Game.Drawn:= False;
 			end;
 		end;
 
@@ -601,7 +605,7 @@ procedure TClientMainForm.MsgUpdateShuffled(var AMessage: TLMessage);
 
 procedure TClientMainForm.MsgUpdateNewFirst(var AMessage: TLMessage);
 	begin
-
+    ClientMainDMod.ActGameBegin.Enabled:= AMessage.lParam = Client.Game.OurSlot;
 	end;
 
 procedure TClientMainForm.MsgUpdateHaveGin(var AMessage: TLMessage);
@@ -617,7 +621,7 @@ procedure TClientMainForm.MsgUpdateHaveGin(var AMessage: TLMessage);
 
     AddGameInfo(IntToStr(AMessage.lParam + 1) + 'P has GIN!!!');
 
-    if  AMessage.lParam = ClientMainDMod.Client.Game.OurSlot then
+    if  AMessage.lParam = Client.Game.OurSlot then
         begin
 	    CardHandFrame1.SetSelected(0, True);
 
@@ -629,7 +633,7 @@ procedure TClientMainForm.MsgUpdateHaveGin(var AMessage: TLMessage);
         CardHandFrame2.ClearCards;
 
         for i:= 0 to 9 do
-        	CardHandFrame2.AddCard(ClientMainDMod.Client.Game.GinCards[i]);
+        	CardHandFrame2.AddCard(Client.Game.GinCards[i]);
 
         PgctrlDeal.ActivePage:= TbshtGin;
 		end;
@@ -637,13 +641,15 @@ procedure TClientMainForm.MsgUpdateHaveGin(var AMessage: TLMessage);
 
 procedure TClientMainForm.MsgUpdateBeginNew(var AMessage: TLMessage);
 	begin
-//	ClientMainDMod.ActGameDrawDeck.Enabled:=
-//			AMessage.lParam = ClientMainDMod.Client.Game.OurSlot;
-//	ClientMainDMod.ActGameDrawDiscard.Enabled:=
-//			AMessage.lParam = ClientMainDMod.Client.Game.OurSlot;
+    if  AMessage.lParam = Client.Game.OurSlot then
+        begin
+        ClientMainDMod.ActGameDrawDeck.Enabled:= True;
+        ClientMainDMod.ActGameDrawDiscard.Enabled:= True;
+		end;
 
-//  ClientMainDMod.ActGameDiscard.Enabled:= False;
-//  ClientMainDMod.ActGameBegin.Enabled:= False;
+    ClientMainDMod.ActGameBegin.Enabled:= False;
+	ClientMainDMod.ActGameDiscard.Enabled:= False;
+  	ClientMainDMod.TimerGIN.Enabled:= False;
 
     CardHandFrame1.ClearCards;
 

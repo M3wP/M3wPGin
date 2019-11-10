@@ -1,0 +1,34 @@
+unit GinTypes;
+
+interface
+
+const
+	YCM_BASE			=	{LM_USER + }$2000;
+	YCM_UPDATEHOST		=   YCM_BASE;
+ 	YCM_UPDATEIDENT		=	YCM_BASE + 1;
+	YCM_UPDATEROOMLIST	=	YCM_BASE + 2;
+	YCM_UPDATEROOMUSERS = 	YCM_BASE + 3;
+	YCM_UPDATEGAMELIST	=	YCM_BASE + 4;
+	YCM_UPDATESLOTSTATE = 	YCM_BASE + 5;
+	YCM_UPDATEROOM		= 	YCM_BASE + 6;
+	YCM_UPDATEGAME		=	YCM_BASE + 7;
+	YCM_UPDATEOURSTATE	=	YCM_BASE + 8;
+	YCM_UPDATENEWDEAL	=	YCM_BASE + 9;
+    YCM_UPDATESHUFFLED  =	YCM_BASE + 10;
+    YCM_UPDATENEWFIRST	=	YCM_BASE + 11;
+    YCM_UPDATEDRAWCARD	=	YCM_BASE + 12;
+	YCM_UPDATEDRAWINFO	=	YCM_BASE + 13;
+    YCM_UPDATEDISCARD	=	YCM_BASE + 14;
+    YCM_UPDATEHAVEGIN 	=	YCM_BASE + 15;
+	YCM_UPDATEBEGINNEW 	= 	YCM_BASE + 16;
+
+type
+	TMessageReflector = class(TObject)
+	public
+		procedure SendMessage(const AMessage:Cardinal; AWParam, ALParam: IntPtr); virtual; abstract;
+	end;
+
+
+implementation
+
+end.

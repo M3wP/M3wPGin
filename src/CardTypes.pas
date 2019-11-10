@@ -27,7 +27,7 @@ type
 
 	TCardSet = set of TCardIndex;
 
-	TCardImageSize = (cisDefault, cisMedium);
+	TCardImageSize = (cisDefault, cisSmall);
 
 	TStandardDeck = array[TPlayingCard] of TPlayingCard;
 
@@ -161,7 +161,7 @@ function  CardIndexToIdent(const ACard: TCardIndex): string;
 function  CardIndexToText(const ACard: TCardIndex): string;
 	const
 	ARR_LIT_CARDFACE: array[cfkAce..cfkKing] of string = (
-			'a', 'Two', 'Three', 'Four', 'Five' ,'Six', 'Seven', 'Eight', 'Nine',
+			'Ace', 'Two', 'Three', 'Four', 'Five' ,'Six', 'Seven', 'Eight', 'Nine',
 			'Ten', 'Jack', 'Queen','King');
 	ARR_LIT_CARDSUIT: array[cskDiamonds..cskSpades] of string = (
 			'Diamonds', 'Clubs', 'Hearts', 'Spades');

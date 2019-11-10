@@ -10,53 +10,6 @@ uses
 	SyncObjs, Generics.Collections, Classes, TCPTypes, TCPServer, GinClasses,
 	CardTypes;
 
-//		0	-	System
-//		00	- 	Hang up
-//		0E	-	Invalid category
-//		0F	-	Invalid empty
-//
-//		1	-	Text
-//		10	-	Information
-//		11	-	Begin
-//		12	-	More
-//		13	-	Data
-//		14	-	Peer
-//
-//		2	-	Lobby
-//		20 	- 	Error
-//		21	-	Join
-//		22	-	Part
-//		23	-	List
-//		24	-	Peer
-//
-//		3	-	Connection
-//		30	-	Error
-//		31	-	Identify
-//
-//		4	-	Client
-//		40	-	Error
-//		41	-	Identify
-//		52	-	KeepAlive
-//
-//		5	-	Server
-//		50	-	Error
-//		51	-	Identify
-//		52	-	Challenge
-//
-//		6	-	Play
-//		60 	- 	Error
-//		61	-	Join
-//		62	-	Part
-//		63	-	List
-//		64	-	TextPeer
-//		65	-	KickPeer
-//		66	-	StatusGame
-//		67	-	StatusPeer
-//		68	-	RollPeer
-//		69	-	KeepersPeer
-//		6A	-	ScoreQuery
-//		6B	-	ScorePeer
-
 type
 
 	{ TServerDispatcher }
@@ -2088,7 +2041,22 @@ procedure TPlayGame.ProcessPlayerMessage(APlayer: TPlayer;
 
                     if  Round < LastRound then
                     	begin
-            			DealToPlayers;
+                        Slots[Turn].State:= psWaiting;
+
+						for i:= 0 to High(Slots) do
+							if  Assigned(Slots[i].Player) then
+								SendSlotStatus(Slots[i].Player, Turn);
+
+
+                        Turn:= First;
+
+                        Slots[Turn].State:= psPlaying;
+
+						for i:= 0 to High(Slots) do
+							if  Assigned(Slots[i].Player) then
+								SendSlotStatus(Slots[i].Player, Turn);
+
+                        DealToPlayers;
 
 //						Check All GIN
 						i:= Turn;

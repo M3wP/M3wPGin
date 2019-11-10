@@ -22,7 +22,7 @@ procedure FinaliseCardGraphics;
 
 implementation
 
-{$R deckA_medium.RES}
+{$R deckA_small.RES}
 
 uses
 	LCLType;
@@ -35,12 +35,12 @@ function InitialiseCardGraphics(const ASize: TCardImageSize;
 	r: TResourceStream;
 
 	begin
-    Assert(ASize in [cisDefault, cisMedium], 'Error determining card image size');
+    Assert(ASize in [cisDefault, cisSmall], 'Error determining card image size');
     Assert((ADeck = '') or (ADeck = 'a'), 'Error determining card image set');
 
     for i:= Low(TCardIndex) to High(TCardIndex) do
 		begin
-        s:= 'card_am_' + CardIndexToIdent(i);
+        s:= 'card_as_' + CardIndexToIdent(i);
 
 		r:= TResourceStream.Create(HINSTANCE, s, RT_RCDATA);
 		try

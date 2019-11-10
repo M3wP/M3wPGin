@@ -193,11 +193,14 @@ var
 
 	ListMessages: TMessageLists;
 
+    Client: TGinClient;
+    Connection: TTCPConnection;
+
 
 implementation
 
 uses
-	Forms, DModClientMain;
+	Forms;
 
 
 const
@@ -235,14 +238,14 @@ procedure TMessageLists.DoBeginMessageList(AMessageList: TMessageList);
 	if  CompareText(string(AMessageList.Desc), ARR_LIT_NAM_CATEGORY[mcLobby]) = 0 then
 		begin
 		if  Length(AMessageList.Locale) = 0 then
-			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEROOMLIST, 0, 0)
+			Client.SendApplicationMessage(YCM_UPDATEROOMLIST, 0, 0)
 		else if  CompareText(string(AMessageList.Locale),
-				string(ClientMainDMod.Client.Room)) = 0 then
-   			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEROOMUSERS, 0, 0)
+				string(Client.Room)) = 0 then
+   			Client.SendApplicationMessage(YCM_UPDATEROOMUSERS, 0, 0)
 		end
 	else if CompareText(string(AMessageList.Desc), ARR_LIT_NAM_CATEGORY[mcPlay]) = 0 then
 		if  Length(AMessageList.Locale) = 0 then
-			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEGAMELIST, 0, 0)
+			Client.SendApplicationMessage(YCM_UPDATEGAMELIST, 0, 0)
 	end;
 
 procedure TMessageLists.DoDataMessageList(AMessageList: TMessageList;
@@ -262,13 +265,11 @@ procedure TMessageLists.DoDataMessageList(AMessageList: TMessageList;
 		if  Length(AMessageList.Locale) > 0 then
 			begin
 			if  CompareText(string(AMessageList.Locale),
-					string(ClientMainDMod.Client.Room)) = 0 then
-            	ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEROOMUSERS,
-						WPARAM(@AData), 1);
+					string(Client.Room)) = 0 then
+            	Client.SendApplicationMessage(YCM_UPDATEROOMUSERS, WPARAM(@AData), 1);
 			end
 		else
-			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEROOMLIST,
-					WPARAM(@AData), 1)
+			Client.SendApplicationMessage(YCM_UPDATEROOMLIST, WPARAM(@AData), 1)
 	else if  CompareText(string(AMessageList.Desc), ARR_LIT_NAM_CATEGORY[mcPlay]) = 0 then
 		if  Length(AMessageList.Locale) > 0 then
 			begin
@@ -278,16 +279,15 @@ procedure TMessageLists.DoDataMessageList(AMessageList: TMessageList;
 
 			s:= Ord(d[Low(AnsiString)]) - $30;
 
-			if  Assigned(ClientMainDMod.Client.Game) then
+			if  Assigned(Client.Game) then
 				begin
-				ClientMainDMod.Client.Game.Slots[s].Name:= u;
-				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATESLOTSTATE,
-						WPARAM(ClientMainDMod.Client.Game.State), s);
+				Client.Game.Slots[s].Name:= u;
+				Client.SendApplicationMessage(YCM_UPDATESLOTSTATE,
+                		WPARAM(Client.Game.State), s);
 				end;
 			end
 		else
-			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEGAMELIST,
-					WPARAM(@AData), 1);
+			Client.SendApplicationMessage(YCM_UPDATEGAMELIST, WPARAM(@AData), 1);
 	end;
 
 constructor TMessageLists.Create;
@@ -365,7 +365,7 @@ procedure TMessageLists.ReceiveTextMessage(AConnection: TTCPConnection;
 				end;
 
 			if  not f then
-				ClientMainDMod.Client.SendClientError(AConnection, LIT_ERR_TEXTINVB);
+				Client.SendClientError(AConnection, LIT_ERR_TEXTINVB);
 			end
 		else if AMessage.Method = $02 then
 			begin
@@ -399,7 +399,7 @@ procedure TMessageLists.ReceiveTextMessage(AConnection: TTCPConnection;
 				end;
 
 			if  not f then
-				ClientMainDMod.Client.SendClientError(AConnection, LIT_ERR_TEXTINVM);
+				Client.SendClientError(AConnection, LIT_ERR_TEXTINVM);
 			end
 		else if AMessage.Method = $03 then
 			begin
@@ -430,7 +430,7 @@ procedure TMessageLists.ReceiveTextMessage(AConnection: TTCPConnection;
 				end;
 
 			if  not f then
-				ClientMainDMod.Client.SendClientError(AConnection, LIT_ERR_TEXTINVD);
+				Client.SendClientError(AConnection, LIT_ERR_TEXTINVD);
 			end;
 	end;
 
@@ -755,39 +755,36 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 			m:= nil;
 
 			if  (CompareText(string(AMessage.Params[1]),
-					string(ClientMainDMod.Client.OurIdent)) = 0) then
+					string(OurIdent)) = 0) then
 				begin
-    			if  not Assigned(ClientMainDMod.Client.Game) then
-                	ClientMainDMod.Client.Game:= TGinGame.Create;
+    			if  not Assigned(Game) then
+                	Game:= TGinGame.Create;
 
-				ClientMainDMod.Client.Game.Ident:= AMessage.Params[0];
+				Game.Ident:= AMessage.Params[0];
 
-				ClientMainDMod.Client.Game.State:= gsWaiting;
-				ClientMainDMod.Client.Game.OurSlot:=
-						Ord(AMessage.Params[2][Low(AnsiString)]) - $30;
+				Game.State:= gsWaiting;
+				Game.OurSlot:= Ord(AMessage.Params[2][Low(AnsiString)]) - $30;
 
-				for i:= 0 to High(ClientMainDMod.Client.Game.Slots) do
-					FillChar(ClientMainDMod.Client.Game.Slots[i],
-							SizeOf(TGameSlot), 0);
+				for i:= 0 to High(Game.Slots) do
+					FillChar(Game.Slots[i], SizeOf(TGameSlot), 0);
 
-				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEGAME,
-						0, 1);
+				SendApplicationMessage(YCM_UPDATEGAME, 0, 1);
 
 				m:= TBaseMessage.Create;
 				m.Category:= mcPlay;
 				m.Method:= $03;
 				end;
 
-			if  Assigned(ClientMainDMod.Client.Game) then
+			if  Assigned(Game) then
 				if  (CompareText(string(AMessage.Params[0]),
-						string(ClientMainDMod.Client.Game.Ident)) = 0) then
+						string(Game.Ident)) = 0) then
 					begin
 					i:= Ord(AMessage.Params[2][Low(AnsiString)]) - $30;
-					ClientMainDMod.Client.Game.Slots[i].Name:= AMessage.Params[1];
+					Game.Slots[i].Name:= AMessage.Params[1];
 					end;
 
 			if  Assigned(m) then
-				m.Params.Add(ClientMainDMod.Client.Game.Ident);
+				m.Params.Add(Game.Ident);
 			end;
 
 		if  Assigned(m) then
@@ -807,21 +804,20 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 
 		if  AMessage.Params.Count > 1 then
 			begin
-			if  Assigned(ClientMainDMod.Client.Game) then
+			if  Assigned(Game) then
 				begin
 				if  CompareText(string(AMessage.Params[1]),
-						string(ClientMainDMod.Client.OurIdent)) = 0 then
+						string(OurIdent)) = 0 then
 					begin
-					ClientMainDMod.Client.Game.Ident:= AnsiString('');
+					Game.Ident:= AnsiString('');
 
-					ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEGAME,
-							0, 0);
+					SendApplicationMessage(YCM_UPDATEGAME, 0, 0);
 
-					ClientMainDMod.Client.Game.Free;
-                    ClientMainDMod.Client.Game:= nil;
+					Game.Free;
+                    Game:= nil;
 					end
 				else if (CompareText(string(AMessage.Params[0]),
-						string(ClientMainDMod.Client.Game.Ident)) = 0) then
+						string(Game.Ident)) = 0) then
 					begin
 
 					end;
@@ -843,19 +839,16 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 
 		if  Length(AMessage.Data) = 2 then
 			begin
-			if  Assigned(ClientMainDMod.Client.Game) then
+			if  Assigned(Game) then
 				begin
-				ClientMainDMod.Client.Game.State:=
-						TGameState(AMessage.Data[0]);
-				ClientMainDMod.Client.Game.Round:= AMessage.Data[1];
+				Game.State:= TGameState(AMessage.Data[0]);
+				Game.Round:= AMessage.Data[1];
 
-				for i:= 0 to High(ClientMainDMod.Client.Game.Slots) do
-					ClientMainDMod.Client.SendApplicationMessage(
-							YCM_UPDATESLOTSTATE,
-							Ord(ClientMainDMod.Client.Game.State), i);
+				for i:= 0 to High(Game.Slots) do
+					SendApplicationMessage(YCM_UPDATESLOTSTATE,
+							Ord(Game.State), i);
 
-				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEOURSTATE,
-						0, 0);
+				SendApplicationMessage(YCM_UPDATEOURSTATE, 0, 0);
 				end;
 			end;
 		end
@@ -865,24 +858,21 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 
 		if  Length(AMessage.Data) = 3 then
 			begin
-			if  Assigned(ClientMainDMod.Client.Game) then
+			if  Assigned(Game) then
 				begin
 				i:= AMessage.Data[0];
-				ClientMainDMod.Client.Game.Slots[i].State:= TPlayerState(
-						AMessage.Data[1]);
-				ClientMainDMod.Client.Game.Slots[i].Score:= AMessage.Data[2] ;
+				Game.Slots[i].State:= TPlayerState(AMessage.Data[1]);
+				Game.Slots[i].Score:= AMessage.Data[2] ;
 
-				ClientMainDMod.Client.SendApplicationMessage(
-						YCM_UPDATESLOTSTATE,
-						Ord(ClientMainDMod.Client.Game.State), i);
+				SendApplicationMessage(YCM_UPDATESLOTSTATE,
+						Ord(Game.State), i);
 
-				if  i = ClientMainDMod.Client.Game.OurSlot then
+				if  i = Game.OurSlot then
                     begin
-                    if  ClientMainDMod.Client.Game.Slots[i].State = psPlaying then
+                    if  Game.Slots[i].State = psPlaying then
                     	Game.Drawn:= False;
 
-    				ClientMainDMod.Client.SendApplicationMessage(
-							YCM_UPDATEOURSTATE, 0, 0);
+    				SendApplicationMessage(YCM_UPDATEOURSTATE, 0, 0);
                     end;
 				end;
 			end;
@@ -893,25 +883,23 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 
 		i:= AMessage.Data[0];
 
-		if  ClientMainDMod.Client.Game.Slots[i].State = psPreparing then
+		if  Game.Slots[i].State = psPreparing then
 			begin
-			ClientMainDMod.Client.Game.Slots[i].FirstCard:= AMessage.Data[1];
-			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATESLOTSTATE,
-					Ord(ClientMainDMod.Client.Game.State), i);
+			Game.Slots[i].FirstCard:= AMessage.Data[1];
+			SendApplicationMessage(YCM_UPDATESLOTSTATE,Ord(Game.State), i);
 			end
 		else
 			begin
-			if  i = ClientMainDMod.Client.Game.OurSlot then
+			if  i = Game.OurSlot then
             	begin
                 if  Game.Dealt then
                 	Game.Drawn:= True;
 
-                ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEDRAWCARD,
-					AMessage.Data[1], AMessage.Data[2]);
+                SendApplicationMessage(YCM_UPDATEDRAWCARD,
+                		AMessage.Data[1], AMessage.Data[2]);
 				end
 			else
-  				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEDRAWINFO,
-  						i, AMessage.Data[2]);
+  				SendApplicationMessage(YCM_UPDATEDRAWINFO, i, AMessage.Data[2]);
 			end;
 
 		end
@@ -921,8 +909,8 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 
         if  Length(AMessage.Data) = 2 then
         	begin
-  			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEDISCARD,
-  					AMessage.Data[0], AMessage.Data[1]);
+  			SendApplicationMessage(YCM_UPDATEDISCARD, AMessage.Data[0],
+            		AMessage.Data[1]);
 
             if  AMessage.Data[0] = Game.OurSlot then
             	Game.Drawn:= False;
@@ -933,10 +921,9 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 		AddLogMessage(slkDebug, 'Message play $0A');
 
         for i:= 1 to 10 do
-            ClientMainDMod.Client.Game.GinCards[i - 1]:= AMessage.Data[i];
+            Game.GinCards[i - 1]:= AMessage.Data[i];
 
-  		ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEHAVEGIN,
-  				0, AMessage.Data[0]);
+  		SendApplicationMessage(YCM_UPDATEHAVEGIN, 0, AMessage.Data[0]);
 
 		end
 	else if AMessage.Method = $0B then
@@ -946,20 +933,14 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
         if  Length(AMessage.Data) = 2 then
             if  AMessage.Data[0] = 0 then
             	begin
-                ClientMainDMod.ActGameBegin.Enabled:= False;
-  				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATENEWDEAL,
-  						0, 0);
+  				SendApplicationMessage(YCM_UPDATENEWDEAL, 0, 0);
                 Game.Dealt:= True;
 				end
         	else if AMessage.Data[0] = 1 then
-  				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATESHUFFLED,
-  						0, 0)
+  				SendApplicationMessage(YCM_UPDATESHUFFLED, 0, 0)
             else if AMessage.Data[0] = 2 then
             	begin
-  				ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATENEWFIRST,
-  						0, 0);
-                ClientMainDMod.ActGameBegin.Enabled:= AMessage.Data[1] =
-                		ClientMainDMod.Client.Game.OurSlot;
+  				SendApplicationMessage(YCM_UPDATENEWFIRST, 0, AMessage.Data[1]);
 				end;
 		end
 	else if AMessage.Method = $0C then
@@ -968,20 +949,9 @@ procedure TGinClient.ProcessPlayMessage(AConnection: TTCPConnection;
 
         if  Length(AMessage.Data) = 1 then
             begin
-            ClientMainDMod.Client.Game.Dealt:= False;
+            Game.Dealt:= False;
 
-            if  AMessage.Data[0] = ClientMainDMod.Client.Game.OurSlot then
-                begin
-                ClientMainDMod.ActGameDrawDeck.Enabled:= True;
-                ClientMainDMod.ActGameDrawDiscard.Enabled:= True;
-				end;
-
-            ClientMainDMod.ActGameBegin.Enabled:= False;
-        	ClientMainDMod.ActGameDiscard.Enabled:= False;
-          	ClientMainDMod.TimerGIN.Enabled:= False;
-
-  			ClientMainDMod.Client.SendApplicationMessage(YCM_UPDATEBEGINNEW,
-  					0, AMessage.Data[0]);
+  			SendApplicationMessage(YCM_UPDATEBEGINNEW, 0, AMessage.Data[0]);
 			end;
 		end;
 	end;

@@ -78,9 +78,6 @@ type
 		procedure TimerGINTimer(Sender: TObject);
 		procedure TimerMainTimer(Sender: TObject);
 	private
-		FConnection: TTCPConnection;
-		FClient: TGinClient;
-
         procedure ConnectForwardBack(const AForward, ABack: TAction);
 
         procedure OnAfterConnect(ASender: TObject);
@@ -96,20 +93,18 @@ type
 	public
       	constructor Create(AOwner: TComponent); override;
 		destructor  Destroy; override;
-
-        property  Connection: TTCPConnection read FConnection;
-		property  Client: TGinClient read FClient;
 	end;
 
 var
 	ClientMainDMod: TClientMainDMod;
+
 
 implementation
 
 {$R *.lfm}
 
 uses
-	LMessages, LCLIntf, Forms, TCPTypes, FormClientMain, CardTypes, GinClasses;
+	LCLIntf, Forms, TCPTypes, FormClientMain, CardTypes, GinClasses;
 
 
 { TClientMainDMod }
@@ -188,9 +183,9 @@ procedure TClientMainDMod.ActNavStartExecute(Sender: TObject);
 
 procedure TClientMainDMod.ActRoomJoinExecute(Sender: TObject);
 	begin
-    if  Length(FClient.Room) = 0 then
+    if  Length(Client.Room) = 0 then
 		if  Length(ClientMainForm.EditRoom.Text) > 0 then
-			FClient.SendRoomJoin(FConnection,
+			Client.SendRoomJoin(Connection,
 					AnsiString(ClientMainForm.EditRoom.Text),
 					AnsiString(ClientMainForm.EditRoomPwd.Text))
 		else
@@ -199,20 +194,20 @@ procedure TClientMainDMod.ActRoomJoinExecute(Sender: TObject);
 
 procedure TClientMainDMod.ActRoomListExecute(Sender: TObject);
 	begin
-    FClient.SendRoomList(FConnection);
+    Client.SendRoomList(Connection);
 	end;
 
 procedure TClientMainDMod.ActRoomMsgExecute(Sender: TObject);
 	begin
-    FClient.SendRoomMessage(FConnection,
+    Client.SendRoomMessage(Connection,
 			AnsiString(ClientMainForm.EditRoomText.Text));
 	ClientMainForm.EditRoomText.Text:= '';
 	end;
 
 procedure TClientMainDMod.ActRoomPartExecute(Sender: TObject);
 	begin
-    if  Length(FClient.Room) > 0 then
-		FClient.SendRoomPart(FConnection);
+    if  Length(Client.Room) > 0 then
+		Client.SendRoomPart(Connection);
 	end;
 
 procedure TClientMainDMod.ActRoomUsersExecute(Sender: TObject);
@@ -261,24 +256,24 @@ procedure TClientMainDMod.TimerMainTimer(Sender: TObject);
 	ProcessRoomLogMessages;
 	ProcessGameLogMessages;
 
-	if  FConnection.Connected then
+	if  Connection.Connected then
 		begin
-	    i:= FConnection.PrepareRead;
+	    i:= Connection.PrepareRead;
 
 		if  i = -1 then
 			DoDisconnect
 		else
 			begin
 	        if  i > 0 then
-				if  not FClient.ReadConnectionData(FConnection, i) then
+				if  not Client.ReadConnectionData(Connection, i) then
 					begin
 					DoDisconnect;
 					Exit;
 					end;
 
-	        FClient.ProcessReadMessages(FConnection);
+	        Client.ProcessReadMessages(Connection);
 
-            if  not FConnection.ProcessSendMessages then
+            if  not Connection.ProcessSendMessages then
 				begin
 				DoDisconnect;
 				Exit;
@@ -305,7 +300,7 @@ procedure TClientMainDMod.ConnectForwardBack(const AForward, ABack: TAction);
 
 procedure TClientMainDMod.OnAfterConnect(ASender: TObject);
 	begin
-    FConnection.Connected:= True;
+    Connection.Connected:= True;
 
 	ClientMainForm.BtnHostCntrl.Action:= ActHostDisconnect;
 
@@ -317,8 +312,8 @@ procedure TClientMainDMod.OnAfterConnect(ASender: TObject);
 
 procedure TClientMainDMod.DoHandleDisconnected;
 	begin
-    FConnection.Connected:= False;
-	FConnection.Purge;
+    Connection.Connected:= False;
+	Connection.Purge;
 
 	ClientMainForm.BtnHostCntrl.Action:= ActHostConnect;
 	AddLogMessage(slkInfo, 'Client disconnected.');
@@ -327,10 +322,10 @@ procedure TClientMainDMod.DoHandleDisconnected;
 	HostLogMessages.Add('! Disconnected from host.');
 	HostLogMessages.Add('');
 
-	if  Assigned(FClient.Server) then
+	if  Assigned(Client.Server) then
 		begin
-		FClient.Server.Free;
-        FClient.Server:= nil;
+		Client.Server.Free;
+        Client.Server:= nil;
 		end;
 
 	ClientMainForm.EditHostInfo.Text:= '';
@@ -353,14 +348,14 @@ procedure TClientMainDMod.ProcessRoomLogMessages;
 		if  (s[Low(string)] = '<')
 		or  (s[Low(string)] = '>') then
 			begin
-			if  not FClient.RoomHaveSpc then
+			if  not Client.RoomHaveSpc then
 				ClientMainForm.MemoRoom.Lines.Add('');
 
 			ClientMainForm.MemoRoom.Lines.Add(s);
 			ClientMainForm.MemoRoom.Lines.Add('');
 
-			FClient.LastSpeak:= '';
-			FClient.RoomHaveSpc:= True;
+			Client.LastSpeak:= '';
+			Client.RoomHaveSpc:= True;
 			end
 		else
 			begin
@@ -384,13 +379,13 @@ procedure TClientMainDMod.ProcessRoomLogMessages;
 
 			if  CompareText(u, Client.LastSpeak) <> 0 then
 				begin
-				FClient.LastSpeak:= u;
+				Client.LastSpeak:= u;
 
 				ClientMainForm.MemoRoom.Lines.Add(u + ':');
 				end;
 
 			ClientMainForm.MemoRoom.Lines.Add(#9 + s);
-			FClient.RoomHaveSpc:= False;
+			Client.RoomHaveSpc:= False;
 			end;
 		end;
 	end;
@@ -412,14 +407,14 @@ procedure TClientMainDMod.ProcessGameLogMessages;
 		if  (s[Low(string)] = '<')
 		or  (s[Low(string)] = '>') then
 			begin
-			if  not FClient.GameHaveSpc then
+			if  not Client.GameHaveSpc then
 				ClientMainForm.MemoGame.Lines.Add('');
 
 			ClientMainForm.MemoGame.Lines.Add(s);
 			ClientMainForm.MemoGame.Lines.Add('');
 
-			FClient.LastGameSpeak:= '';
-			FClient.GameHaveSpc:= True;
+			Client.LastGameSpeak:= '';
+			Client.GameHaveSpc:= True;
 			end
 		else
 			begin
@@ -443,13 +438,13 @@ procedure TClientMainDMod.ProcessGameLogMessages;
 
 			if  CompareText(u, Client.LastSpeak) <> 0 then
 				begin
-				FClient.LastGameSpeak:= u;
+				Client.LastGameSpeak:= u;
 
 				ClientMainForm.MemoGame.Lines.Add(u + ':');
 				end;
 
 			ClientMainForm.MemoGame.Lines.Add(#9 + s);
-			FClient.GameHaveSpc:= False;
+			Client.GameHaveSpc:= False;
 			end;
 		end;
 	end;
@@ -463,14 +458,14 @@ procedure TClientMainDMod.DoConnect;
 
 	Application.MainForm.Cursor:= crHourGlass;
 	try
-	    FConnection.Connected:= False;
-	    FConnection.Socket.ConnectionTimeout:= 5000;
-	    FConnection.Socket.Connect(ClientMainForm.EditHost.Text, '7520');
+	    Connection.Connected:= False;
+	    Connection.Socket.ConnectionTimeout:= 5000;
+	    Connection.Socket.Connect(ClientMainForm.EditHost.Text, '7520');
 
-		if  Assigned(FClient.Server) then
+		if  Assigned(Client.Server) then
 			begin
-			FClient.Server.Free;
-			FClient.Server:= nil;
+			Client.Server.Free;
+			Client.Server:= nil;
 			end;
 
 		ClientMainForm.EditHostInfo.Text:= '';
@@ -483,7 +478,7 @@ procedure TClientMainDMod.DoConnect;
 procedure TClientMainDMod.DoDisconnect;
 	begin
 	try
-    	FConnection.Socket.CloseSocket;
+    	Connection.Socket.CloseSocket;
 		except
 		end;
 
@@ -494,16 +489,16 @@ constructor TClientMainDMod.Create(AOwner: TComponent);
 	begin
 	inherited Create(AOwner);
 
-    FConnection:= TTCPConnection.Create;
-	FClient:= TGinClient.Create;
+    Connection:= TTCPConnection.Create;
+	Client:= TGinClient.Create;
 
-	FConnection.Socket.OnAfterConnect:= OnAfterConnect;
+	Connection.Socket.OnAfterConnect:= OnAfterConnect;
 	end;
 
 destructor TClientMainDMod.Destroy;
 	begin
-    FClient.Free;
-	FConnection.Free;
+    Client.Free;
+	Connection.Free;
 
 	inherited Destroy;
 	end;
@@ -521,11 +516,11 @@ procedure TClientMainDMod.ActNavChatExecute(Sender: TObject);
 
 procedure TClientMainDMod.ActHostConnectExecute(Sender: TObject);
 	begin
-    if  not FConnection.Connected then
+    if  not Connection.Connected then
 		begin
         if  Length(ClientMainForm.EditUserName.Text) > 0 then
         	begin
-            FClient.OurIdent:= ClientMainForm.EditUserName.Text;
+            Client.OurIdent:= ClientMainForm.EditUserName.Text;
 			DoConnect;
 			end
 		else
@@ -535,9 +530,9 @@ procedure TClientMainDMod.ActHostConnectExecute(Sender: TObject);
 
 procedure TClientMainDMod.ActGameJoinExecute(Sender: TObject);
 	begin
-    if  not Assigned(FClient.Game) then
+    if  not Assigned(Client.Game) then
 		if  Length(ClientMainForm.EditGame.Text) > 0 then
-			FClient.SendGameJoin(FConnection,
+			Client.SendGameJoin(Connection,
 					AnsiString(ClientMainForm.EditGame.Text),
 					AnsiString(ClientMainForm.EditGamePwd.Text))
 		else
@@ -546,28 +541,28 @@ procedure TClientMainDMod.ActGameJoinExecute(Sender: TObject);
 
 procedure TClientMainDMod.ActGameListExecute(Sender: TObject);
 	begin
-    FClient.SendGameList(FConnection);
+    Client.SendGameList(Connection);
 	end;
 
 procedure TClientMainDMod.ActGameControlExecute(Sender: TObject);
 	begin
-	if  Assigned(FClient.Game) then
+	if  Assigned(Client.Game) then
 		begin
 		if  ActGameControl.Tag = 1 then
-            FClient.SendGameSlotStatus(FConnection, FClient.Game.OurSlot,
+            Client.SendGameSlotStatus(Connection, Client.Game.OurSlot,
 					psReady)
 		else if ActGameControl.Tag = 2 then
-            FClient.SendGameSlotStatus(FConnection, FClient.Game.OurSlot,
+            Client.SendGameSlotStatus(Connection, Client.Game.OurSlot,
 					psIdle)
 		else if ActGameControl.Tag = 3 then
-			FClient.SendGameDrawCard(FConnection, FClient.Game.OurSlot,
+			Client.SendGameDrawCard(Connection, Client.Game.OurSlot,
 					False);
 		end;
 	end;
 
 procedure TClientMainDMod.ActGameBeginExecute(Sender: TObject);
 	begin
-	FClient.SendGameBegin(FConnection, FClient.Game.OurSlot);
+	Client.SendGameBegin(Connection, Client.Game.OurSlot);
 	end;
 
 procedure TClientMainDMod.ActGameDiscardExecute(Sender: TObject);
@@ -584,31 +579,29 @@ procedure TClientMainDMod.ActGameDiscardExecute(Sender: TObject);
             Break;
             end;
 
-    FClient.SendGameDiscard(FConnection, FClient.Game.OurSlot,
+    Client.SendGameDiscard(Connection, Client.Game.OurSlot,
     		ClientMainForm.CardHandFrame1.Cards[s]);
 	end;
 
 procedure TClientMainDMod.ActGameDrawDeckExecute(Sender: TObject);
 	begin
-    FClient.SendGameDrawCard(FConnection, FClient.Game.OurSlot,
-    		False);
+    Client.SendGameDrawCard(Connection, Client.Game.OurSlot, False);
 	end;
 
 procedure TClientMainDMod.ActGameDrawDiscardExecute(Sender: TObject);
 	begin
-    FClient.SendGameDrawCard(FConnection, FClient.Game.OurSlot,
-    		True);
+    Client.SendGameDrawCard(Connection, Client.Game.OurSlot, True);
 	end;
 
 procedure TClientMainDMod.ActGamePartExecute(Sender: TObject);
 	begin
-    if  Assigned(FClient.Game) then
-		FClient.SendGamePart(FConnection);
+    if  Assigned(Client.Game) then
+		Client.SendGamePart(Connection);
 	end;
 
 procedure TClientMainDMod.ActHostDisconnectExecute(Sender: TObject);
 	begin
-    if  FConnection.Connected then
+    if  Connection.Connected then
 		DoDisconnect
 	else
 		DoHandleDisconnected;

@@ -1,0 +1,14 @@
+object CardHandFrame: TCardHandFrame
+  Size.Width = 833.000000000000000000
+  Size.Height = 279.000000000000000000
+  Size.PlatformDefault = False
+  object Rectangle1: TRectangle
+    Fill.Color = claDodgerblue
+    Position.X = 8.000000000000000000
+    Position.Y = 4.000000000000000000
+    Size.Width = 9.000000000000000000
+    Size.Height = 81.000000000000000000
+    Size.PlatformDefault = False
+    Stroke.Kind = None
+  end
+end
