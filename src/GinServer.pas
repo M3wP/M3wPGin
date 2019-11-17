@@ -1957,7 +1957,9 @@ procedure TPlayGame.ProcessPlayerMessage(APlayer: TPlayer;
 				try
 					s:= AMessage.Data[0];
 
-                    if  Turn = s then
+                    if  (Turn = s)
+                    and Slots[s].Drawn
+                    and (LastDiscard <> AMessage.Data[1]) then
                     	begin
                         if  not RemovePlayerCard(s, AMessage.Data[1]) then
                             begin
@@ -2039,7 +2041,7 @@ procedure TPlayGame.ProcessPlayerMessage(APlayer: TPlayer;
 		                    Slots[i].Player.AddSendMessage(m);
 							end;
 
-                    if  Round < LastRound then
+                    if  Round <= LastRound then
                     	begin
                         Slots[Turn].State:= psWaiting;
 
@@ -2078,7 +2080,7 @@ procedure TPlayGame.ProcessPlayerMessage(APlayer: TPlayer;
 							end;
 						end;
 
-                    if  Round >= LastRound then
+                    if  Round > LastRound then
                     	begin
                         State:= gsFinished;
 
